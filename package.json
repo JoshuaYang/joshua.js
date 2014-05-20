@@ -1,0 +1,29 @@
+{
+  "name": "joshua.js",
+  "description": "a useful javascript libarary",
+  "version": "0.0.1",
+  "author": {
+    "name": "Joshua Yang",
+    "email": "yss901025@gmail.com"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "latest",
+    "grunt-contrib-qunit": "latest",
+    "grunt-contrib-concat": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-contrib-clean": "latest",
+    "grunt": "latest",
+    "grunt-contrib-requirejs": "latest",
+    "grunt-contrib-connect": "latest",
+    "bower": "latest",
+    "less": "latest",
+    "grunt-bower": "latest",
+    "grunt-contrib-less": "latest",
+    "grunt-contrib-copy": "latest",
+    "grunt-contrib-imagemin": "0.2.1",
+    "grunt-contrib-htmlmin": "latest",
+    "grunt-regex-replace": "latest",
+    "grunt-parallel": "latest"
+  }
+}
