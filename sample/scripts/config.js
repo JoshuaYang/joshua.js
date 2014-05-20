@@ -23,12 +23,13 @@ require.config({
         'modernizr': 'vendors/modernizr/modernizr'
     },
     shim: {
-    }, packages: [
+    }, 
+    packages: [
         { name: 'greensock', main: '', location: 'vendors/greensock/src/uncompressed' },
-        { name: 'joshua', main: '', location: '../../dev' }]
+        { name: 'joshua', main: '', location: '../dev' }]
 });
 
-require(['domReady!'], function () {
+require(['scripts/pages/index.js', 'domReady!'], function (index) {
     
 });
 
