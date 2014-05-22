@@ -1,4 +1,4 @@
-define(['jquery', 'joshua/Sprite', 'domReady!'], function($, Sprite){
+define(['jquery', 'joshua/Sprite', 'joshua/Picture', 'domReady!'], function($, Sprite, Picture){
 	
 	/* begin Sprite */
 
@@ -7,8 +7,8 @@ define(['jquery', 'joshua/Sprite', 'domReady!'], function($, Sprite){
 		s1 = new Sprite('.js-sprite1', {
 			width: 320,
 			height: 238,
-			texture: 'images/cursorFrames.png',
-			staticSource: 'images/cursorStatic.png',
+			texture: 'images/sprite/cursorFrames.png',
+			staticSource: 'images/sprite/cursorStatic.png',
 			frames: 72,
 			firstFrame: 0,
 			lastFrame: 71,
@@ -47,7 +47,7 @@ define(['jquery', 'joshua/Sprite', 'domReady!'], function($, Sprite){
 			width: 58,
 			height: 52,
 			frames: 29,
-			texture: 'images/arrowFrames.png',
+			texture: 'images/sprite/arrowFrames.png',
 			loop: false,
 			reverse: true,
 			offsetX: 50,
@@ -77,4 +77,17 @@ define(['jquery', 'joshua/Sprite', 'domReady!'], function($, Sprite){
 	frameAnimation();
 
 	/* end Sprite */
+
+
+
+
+	/* begin Picture */
+
+	var p1;
+	function preload(){
+		new Picture('.js-picture1');
+	}
+
+	preload();
+	/* end Picture */
 });
