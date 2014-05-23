@@ -376,3 +376,6 @@ body {
 #picture {
   background-color: pink;
 }
+#picture .js-picture {
+  display: inline-block;
+}

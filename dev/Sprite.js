@@ -19,6 +19,9 @@ define(['jquery'], function($){
 		this._build(opts);
 	}
 
+	// class name of sprite object
+	Sprite.className = "js-sprite";
+
 	// alive object array
 	Sprite._instances = [];
 
@@ -49,7 +52,7 @@ define(['jquery'], function($){
 		}
 	}
 
-	// get a frame object
+	// get a sprite object
 	Sprite.get = function(element){
 		var ele = $(element)[0];
 		for (var i = 0; i < Sprite._instances.length; ++i) {
@@ -61,7 +64,7 @@ define(['jquery'], function($){
 	    return null;
 	}
 
-	// remove and dispose frame object
+	// remove and dispose sprite object
 	Sprite.remove = function(instance){
 		var index = Sprite._instances.indexOf(instance);
 		if (index >= 0) {
@@ -77,7 +80,7 @@ define(['jquery'], function($){
 		this.$element.find('img, canvas').css('width', '100%');
 	}
 
-	// build options and do next
+	// set options and do next
 	Sprite.prototype._build = function(opts){
 		this._initProperty(opts);
 
@@ -237,7 +240,7 @@ define(['jquery'], function($){
 		this._context.drawImage(this._img, xPos * this._width, yPos * this._height, this._width, this._height, this._offsetX, this._offsetY, this._width, this._height);
 	}
 
-	// dispose resource of frame object
+	// dispose resource of sprite object
 	Sprite.prototype._dispose = function(){
 		$(this).off();
 		delete this._width;

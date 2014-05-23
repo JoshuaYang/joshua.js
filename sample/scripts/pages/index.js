@@ -30,19 +30,19 @@ define(['jquery', 'joshua/Sprite', 'joshua/Picture', 'domReady!'], function($, S
 		});
 	}
 
-	$('#play').on('click', function(){
+	$('#sprite #play').on('click', function(){
 		s1.play();
 	})
 
-	$('#pause').on('click', function(){
+	$('#sprite #pause').on('click', function(){
 		s1.pause();
 	})
 
-	$('#replay').on('click', function(){
+	$('#sprite #replay').on('click', function(){
 		s1.replay();
 	})
 
-	$('#config').on('click', function(){
+	$('#sprite #config').on('click', function(){
 		s1.config({
 			width: 58,
 			height: 52,
@@ -62,15 +62,15 @@ define(['jquery', 'joshua/Sprite', 'joshua/Picture', 'domReady!'], function($, S
 		});
 	})
 
-	$('#seekTo').on('click', function(){
+	$('#sprite #seekTo').on('click', function(){
 		s1.seekTo($('#seekValue').val());
 	})
 
-	$('#get').on('click', function(){
+	$('#sprite #get').on('click', function(){
 		console.log(Sprite.get('.js-sprite1'));
 	});
 
-	$('#remove').on('click', function(){
+	$('#sprite #remove').on('click', function(){
 		Sprite.remove(s1);
 	});
 
@@ -85,8 +85,24 @@ define(['jquery', 'joshua/Sprite', 'joshua/Picture', 'domReady!'], function($, S
 
 	var p1;
 	function preload(){
-		new Picture('.js-picture1');
+		$('.js-picture').each(function(i, item){
+			var p = new Picture(item);
+
+			$(p).on('done', function(){
+				console.log(i);
+			}).on('error', function(){
+				console.log('error');
+			});
+		});
 	}
+
+	$('#picture #get').on('click', function(){
+		console.log(Picture.get('.js-picture1'));
+	});
+
+	$('#picture #remove').on('click', function(){
+		Picture.remove(Picture.get('.js-picture1'));
+	});
 
 	preload();
 	/* end Picture */
