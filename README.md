@@ -1,4 +1,4 @@
-![joshua](https://avatars1.githubusercontent.com/u/5389166?s=460)
+![joshua](https://raw.githubusercontent.com/JoshuaYang/joshua.js/master/res/joshua.js.jpg)
 # joshua.js
 a useful javascript library
 
