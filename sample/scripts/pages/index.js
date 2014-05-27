@@ -1,4 +1,4 @@
-define(['jquery', 'joshua/Sprite', 'joshua/Picture', 'domReady!'], function($, Sprite, Picture){
+define(['jquery', 'joshua/ui/Sprite', 'joshua/ui/Picture', 'joshua/test', 'domReady!'], function($, Sprite, Picture){
 	
 	/* begin Sprite */
 
@@ -24,9 +24,9 @@ define(['jquery', 'joshua/Sprite', 'joshua/Picture', 'domReady!'], function($, S
 		});
 
 		$(s1).on('loaded', function(){
-			console.log('loaded');
+			//console.log('loaded');
 		}).on('done', function(){
-			console.log('done');
+			//console.log('done');
 		});
 	}
 
@@ -55,10 +55,10 @@ define(['jquery', 'joshua/Sprite', 'joshua/Picture', 'domReady!'], function($, S
 		});
 
 		$(s1).off('loaded').on('loaded', function(){
-			console.log('loaded2');
+			//console.log('loaded2');
 		});
 		$(s1).off('done').on('done', function(){
-			console.log('done2');
+			//console.log('done2');
 		});
 	})
 
@@ -89,9 +89,9 @@ define(['jquery', 'joshua/Sprite', 'joshua/Picture', 'domReady!'], function($, S
 			var p = new Picture(item);
 
 			$(p).on('done', function(){
-				console.log(i);
+				//console.log(i);
 			}).on('error', function(){
-				console.log('error');
+				//console.log('error');
 			});
 		});
 	}

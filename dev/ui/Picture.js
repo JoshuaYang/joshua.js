@@ -3,36 +3,39 @@
  * @date 2013/5/22
  */
 
-define(['jquery', 'modernizr', 'greensock/TweenMax'], function($){
-	function Picture(element){
-		var instance = Picture.get(element);
-		if(instance){
-			return instance;
+define(['jquery', 'joshua/util/class', 'modernizr', 'greensock/TweenMax'], function($, Class){
+	// constructor method
+	var Scheme = Class.extend({
+		init: function(element){
+			var instance = Scheme.get(element);
+			if(instance){
+				return instance;
+			}
+
+			Scheme._instances.push(this);
+
+			this.$element = $(element);
+			this._build();
 		}
-
-		Picture._instances.push(this);
-
-		this.$element = $(element);
-		this._build();
-	}
+	});
 
 	// class name of picture object
-	Picture.className = "js-picture";
+	Scheme.className = "js-picture";
 
 	// alive object array
-	Picture._instances = [];
+	Scheme._instances = [];
 	
 	// default options
-	Picture._options = {
+	Scheme._options = {
 		enterAnimate: false,
 		enterDuration: 0.5
 	};
 
 	// get a picture object
-	Picture.get = function(element){
+	Scheme.get = function(element){
 		var ele = $(element)[0];
-		for (var i = 0; i < Picture._instances.length; ++i) {
-	        var instance = Picture._instances[i];
+		for (var i = 0; i < Scheme._instances.length; ++i) {
+	        var instance = Scheme._instances[i];
 	        if (instance.$element && instance.$element[0] == ele) {
 	            return instance;
 	        }
@@ -41,28 +44,27 @@ define(['jquery', 'modernizr', 'greensock/TweenMax'], function($){
 	}
 
 	// remove and dispose frame object
-	Picture.remove = function(instance){
-		var index = Picture._instances.indexOf(instance);
+	Scheme.remove = function(instance){
+		var index = Scheme._instances.indexOf(instance);
 		if (index >= 0) {
-	        Picture._instances.splice(index, 1);
+	        Scheme._instances.splice(index, 1);
 	        instance._dispose();
 	        instance = null;
 	    }
 	}
 
 	// set options and do next
-	Picture.prototype._build = function(){
+	Scheme.prototype._build = function(){
 		this._initProperty();
 		this._load();
 	}
 
 	// set options
-	Picture.prototype._initProperty = function(){
-		var options = $.extend({}, Picture._options, {
+	Scheme.prototype._initProperty = function(){
+		var options = $.extend({}, Scheme._options, {
 			enterAnimate: this.$element.attr('js-enter-animate') == 'true',
 			enterDuration: this.$element.attr('js-enter-duration')
 		});
-
 
 		this._source = this.$element.attr('js-source');
 		this._enterAnimate = options.enterAnimate;
@@ -74,7 +76,7 @@ define(['jquery', 'modernizr', 'greensock/TweenMax'], function($){
 	}
 
 	// load image source
-	Picture.prototype._load = function(){
+	Scheme.prototype._load = function(){
 		var scope = this;
 
 		scope._texture = $('<img>').one('load', function(){
@@ -89,7 +91,7 @@ define(['jquery', 'modernizr', 'greensock/TweenMax'], function($){
 	}
 
 	// render image
-	Picture.prototype._render = function(){
+	Scheme.prototype._render = function(){
 		this._beforeAnimate();
 
 		if(this._renderCanvas){
@@ -107,7 +109,7 @@ define(['jquery', 'modernizr', 'greensock/TweenMax'], function($){
 	}
 
 	// pretreatment for animate
-	Picture.prototype._beforeAnimate = function(){
+	Scheme.prototype._beforeAnimate = function(){
 		if(!this._enterAnimate){
 			return;
 		}
@@ -118,7 +120,7 @@ define(['jquery', 'modernizr', 'greensock/TweenMax'], function($){
 	}
 
 	// do animate if exist
-	Picture.prototype._animate = function(){
+	Scheme.prototype._animate = function(){
 		if(!this._enterAnimate){
 			return;
 		}
@@ -129,7 +131,7 @@ define(['jquery', 'modernizr', 'greensock/TweenMax'], function($){
 	}
 
 	// dispose resource of picture object
-	Picture.prototype._dispose = function(){
+	Scheme.prototype._dispose = function(){
 		$(this).off();
 		delete this._source;
 		delete this._enterAnimate;
@@ -146,5 +148,5 @@ define(['jquery', 'modernizr', 'greensock/TweenMax'], function($){
 	}
 
 
-	return Picture;
+	return Scheme;
 });

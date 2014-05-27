@@ -1,5 +1,5 @@
 ![joshua](https://avatars1.githubusercontent.com/u/5389166?s=460)
-# joshua-sprite
+# Sprite
 display sequence images.
 
 ## html format：

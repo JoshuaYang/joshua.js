@@ -1,5 +1,5 @@
 ![joshua](https://avatars1.githubusercontent.com/u/5389166?s=460)
-# joshua-picture
+# Picture
 preload image. If browser support canvas, will use `<canvas>`, otherwise will use `<img>`.
 
 ## html format：

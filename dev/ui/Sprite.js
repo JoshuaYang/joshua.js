@@ -3,30 +3,32 @@
  * @date 2013/5/6
  */
 
-define(['jquery', 'modernizr'], function($){
+define(['jquery', 'joshua/util/class', 'modernizr'], function($, Class){
  	// constructor method
-	function Sprite(element, opts){
-		var instance = Sprite.get(element);
-		if(instance){
-			return instance;
-		}
+ 	var Scheme = Class.extend({
+ 		init: function(element, opts){
+ 			var instance = Scheme.get(element);
+			if(instance){
+				return instance;
+			}
 
-		Sprite._instances.push(this);
+			Scheme._instances.push(this);
 
-		this.$element = $(element);
-		this._setCss();
+			this.$element = $(element);
+			this._setCss();
 
-		this._build(opts);
-	}
+			this._build(opts);
+ 		}
+ 	});
 
 	// class name of sprite object
-	Sprite.className = "js-sprite";
+	Scheme.className = "js-sprite";
 
 	// alive object array
-	Sprite._instances = [];
+	Scheme._instances = [];
 
 	// default options
-	Sprite._options = {
+	Scheme._options = {
 		firstFrame: 0,
 		//lastFrame: ,
 		rows: 1,
@@ -43,10 +45,10 @@ define(['jquery', 'modernizr'], function($){
 	};
 
 	// get a sprite object
-	Sprite.get = function(element){
+	Scheme.get = function(element){
 		var ele = $(element)[0];
-		for (var i = 0; i < Sprite._instances.length; ++i) {
-	        var instance = Sprite._instances[i];
+		for (var i = 0; i < Scheme._instances.length; ++i) {
+	        var instance = Scheme._instances[i];
 	        if (instance.$element && instance.$element[0] == ele) {
 	            return instance;
 	        }
@@ -55,23 +57,23 @@ define(['jquery', 'modernizr'], function($){
 	}
 
 	// remove and dispose sprite object
-	Sprite.remove = function(instance){
-		var index = Sprite._instances.indexOf(instance);
+	Scheme.remove = function(instance){
+		var index = Scheme._instances.indexOf(instance);
 		if (index >= 0) {
-	        Sprite._instances.splice(index, 1);
+	        Scheme._instances.splice(index, 1);
 	        instance._dispose();
 	        instance = null;
 	    }
 	}
 
 	// set css properties
-	Sprite.prototype._setCss = function(){
+	Scheme.prototype._setCss = function(){
 		this.$element.find('div, img').css('display', 'none');
 		this.$element.find('img, canvas').css('width', '100%');
 	}
 
 	// set options and do next
-	Sprite.prototype._build = function(opts){
+	Scheme.prototype._build = function(opts){
 		this._initProperty(opts);
 
 		if(!this._renderCanvas){
@@ -84,8 +86,8 @@ define(['jquery', 'modernizr'], function($){
 	}
 
 	// init properties
-	Sprite.prototype._initProperty = function(opts){
-		var options = $.extend({}, Sprite._options, {
+	Scheme.prototype._initProperty = function(opts){
+		var options = $.extend({}, Scheme._options, {
 			width: this.$element.attr('js-width'),
 			height: this.$element.attr('js-height'),
 			texture: this.$element.attr('js-texture'),
@@ -131,7 +133,7 @@ define(['jquery', 'modernizr'], function($){
 	}
 
 	// show static image, only when browser doesn't support canvas
-	Sprite.prototype._renderStatic = function(){
+	Scheme.prototype._renderStatic = function(){
 		var scope = this;
 
 		var img = scope.$element.find("img[src='" + scope._staticSource + "']");
@@ -148,7 +150,7 @@ define(['jquery', 'modernizr'], function($){
 	}
 
 	// init canvas, and get the context
-	Sprite.prototype._initStage = function(){
+	Scheme.prototype._initStage = function(){
 		var scope = this;
 
 		scope._canvas = $('<canvas width="' + scope._cWidth + '" height="' + scope._cHeight + '">').css('width', '100%').appendTo(scope.$element)[0];
@@ -156,7 +158,7 @@ define(['jquery', 'modernizr'], function($){
 	}
 
 	// load resource image
-	Sprite.prototype._loadResource = function(){
+	Scheme.prototype._loadResource = function(){
 		var scope = this;
 			$scope = $(scope);
 
@@ -190,7 +192,7 @@ define(['jquery', 'modernizr'], function($){
 	}
 
 	// render frame animation, and check if reach end or should loop
-	Sprite.prototype._renderFrames = function(){
+	Scheme.prototype._renderFrames = function(){
 		var scope = this,
 			$scope = $(scope);
 
@@ -222,7 +224,7 @@ define(['jquery', 'modernizr'], function($){
 	}
 
 	// draw current frame
-	Sprite.prototype._draw = function(){
+	Scheme.prototype._draw = function(){
 		var xPos = this._currentIndex % this._cols;
 		var yPos = parseInt(this._currentIndex / this._cols);
 
@@ -231,7 +233,7 @@ define(['jquery', 'modernizr'], function($){
 	}
 
 	// dispose resource of sprite object
-	Sprite.prototype._dispose = function(){
+	Scheme.prototype._dispose = function(){
 		$(this).off();
 		delete this._width;
 		delete this._width;
@@ -264,7 +266,7 @@ define(['jquery', 'modernizr'], function($){
 	}
 
 	// pause the animation at current frame
-	Sprite.prototype.pause = function(){
+	Scheme.prototype.pause = function(){
 		if(!this._renderCanvas) return;
 		if(!this._loaded) return;
 		if(this._paused) return;
@@ -276,7 +278,7 @@ define(['jquery', 'modernizr'], function($){
 	}
 
 	// play the animation from current frame
-	Sprite.prototype.play = function(){
+	Scheme.prototype.play = function(){
 		if(!this._renderCanvas) return;
 		if(!this._loaded) return;
 		if(!this._paused) return;
@@ -288,7 +290,7 @@ define(['jquery', 'modernizr'], function($){
 	}
 
 	// replay the paused or finished animation from the first frame
-	Sprite.prototype.replay = function(){
+	Scheme.prototype.replay = function(){
 		if(!this._renderCanvas) return;
 		if(!this._loaded) return;
 		if(!this._paused) return;
@@ -301,7 +303,7 @@ define(['jquery', 'modernizr'], function($){
 	}
 
 	// jump to the specified frame
-	Sprite.prototype.seekTo = function(index){
+	Scheme.prototype.seekTo = function(index){
 		if(!this._renderCanvas) return;
 
 		this._ended = false;
@@ -313,8 +315,8 @@ define(['jquery', 'modernizr'], function($){
 		this._draw();
 	}
 
-	// config Sprite object with new options
-	Sprite.prototype.config = function(opts){
+	// config Scheme object with new options
+	Scheme.prototype.config = function(opts){
 		if(!this._renderCanvas) return;
 		if(!this._paused) return;
 
@@ -343,6 +345,6 @@ define(['jquery', 'modernizr'], function($){
 	}
 
 
-	return Sprite;
+	return Scheme;
 });
 
