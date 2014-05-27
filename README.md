@@ -4,3 +4,4 @@ a useful javascript library
 
 * Sprite - display sequence images
 * Picture - preload image source
+* Class - for object-oriented programming

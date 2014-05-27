@@ -1,6 +1,6 @@
 ![joshua](https://avatars1.githubusercontent.com/u/5389166?s=460)
 # Class
-a javascript module for object-oriented.
+a javascript module for object-oriented programming.
 
 ## usage
 ```javascript
