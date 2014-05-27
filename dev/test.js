@@ -1,4 +1,9 @@
-define(['jquery', 'joshua/util/class'], function($, Class){
+/**
+ * @author Joshua
+ * @date 2013/5/27
+ */
+
+define(['jquery', 'joshua/util/Class'], function($, Class){
 	// var Person = Class.extend({
 	// 	init: function(){
 	// 		//console.log('PPPP');

@@ -1,5 +1,37 @@
 define(['jquery', 'joshua/ui/Sprite', 'joshua/ui/Picture', 'joshua/test', 'domReady!'], function($, Sprite, Picture){
 	
+	/* begin Picture */
+	var p1;
+	function preload(){
+		$('.js-picture').each(function(i, item){
+			var p = new Picture(item);
+
+			$(p).on('done', function(){
+				//console.log(i);
+			}).on('error', function(){
+				//console.log('error');
+			});
+		});
+	}
+
+	$('#picture #get').on('click', function(){
+		console.log(Picture.get('.js-picture1'));
+	});
+
+	$('#picture #remove').on('click', function(){
+		Picture.remove(Picture.get('.js-picture1'));
+	});
+
+	preload();
+	/* end Picture */
+
+
+
+
+
+
+
+
 	/* begin Sprite */
 
 	var s1;
@@ -75,35 +107,5 @@ define(['jquery', 'joshua/ui/Sprite', 'joshua/ui/Picture', 'joshua/test', 'domRe
 	});
 
 	frameAnimation();
-
-	/* end Sprite */
-
-
-
-
-	/* begin Picture */
-
-	var p1;
-	function preload(){
-		$('.js-picture').each(function(i, item){
-			var p = new Picture(item);
-
-			$(p).on('done', function(){
-				//console.log(i);
-			}).on('error', function(){
-				//console.log('error');
-			});
-		});
-	}
-
-	$('#picture #get').on('click', function(){
-		console.log(Picture.get('.js-picture1'));
-	});
-
-	$('#picture #remove').on('click', function(){
-		Picture.remove(Picture.get('.js-picture1'));
-	});
-
-	preload();
-	/* end Picture */
+	/* end Sprite */	
 });

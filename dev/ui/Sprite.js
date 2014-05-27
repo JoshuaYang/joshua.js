@@ -3,7 +3,7 @@
  * @date 2013/5/6
  */
 
-define(['jquery', 'joshua/util/class', 'modernizr'], function($, Class){
+define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], function($, Picture, Class){
  	// constructor method
  	var Scheme = Class.extend({
  		init: function(element, opts){
@@ -168,10 +168,11 @@ define(['jquery', 'joshua/util/class', 'modernizr'], function($, Class){
 			return;
 		}
 
-		var ss = scope.$element.find("img[src='" + scope._texture + "']");
+		var ss = scope.$element.find("[js-source='" + scope._texture + "']");
 		if(ss.length > 0){
-			scope._img = ss[0];
+			scope._img = Picture.get(ss)._texture;
 			scope._loaded = true;
+			console.log(scope._img);
 
 			setTimeout(function(){
 				$scope.trigger('loaded');
