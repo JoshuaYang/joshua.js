@@ -3,7 +3,7 @@
  * @date 2013/5/22
  */
 
-define(['jquery', 'greensock/TweenMax'], function($){
+define(['jquery', 'modernizr', 'greensock/TweenMax'], function($){
 	function Picture(element){
 		var instance = Picture.get(element);
 		if(instance){
@@ -27,16 +27,6 @@ define(['jquery', 'greensock/TweenMax'], function($){
 		enterAnimate: false,
 		enterDuration: 0.5
 	};
-
-	// check whether browser support canvas or not
-	Picture._supportCanvas = function(){
-		if(document.createElement('canvas').getContext){
-			return true;
-		}else{
-			console.log("don't support canvas");
-			return false;
-		}
-	}
 
 	// get a picture object
 	Picture.get = function(element){
@@ -80,7 +70,7 @@ define(['jquery', 'greensock/TweenMax'], function($){
 
 		this._loaded = false;
 		this._rendered = false;
-		this._renderCanvas = Picture._supportCanvas();
+		this._renderCanvas = Modernizr.canvas;
 	}
 
 	// load image source

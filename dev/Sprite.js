@@ -3,7 +3,7 @@
  * @date 2013/5/6
  */
 
-define(['jquery'], function($){
+define(['jquery', 'modernizr'], function($){
  	// constructor method
 	function Sprite(element, opts){
 		var instance = Sprite.get(element);
@@ -41,16 +41,6 @@ define(['jquery'], function($){
 		onInitialized: null,
 		onFinished: null
 	};
-
-	// check whether browser support canvas or not
-	Sprite._supportCanvas = function(){
-		if(document.createElement('canvas').getContext){
-			return true;
-		}else{
-			console.log("don't support canvas");
-			return false;
-		}
-	}
 
 	// get a sprite object
 	Sprite.get = function(element){
@@ -137,7 +127,7 @@ define(['jquery'], function($){
 		this._paused = true;
 		this._ended = false;
 		this._loaded = false;
-		this._renderCanvas = Sprite._supportCanvas();
+		this._renderCanvas = Modernizr.canvas;
 	}
 
 	// show static image, only when browser doesn't support canvas
