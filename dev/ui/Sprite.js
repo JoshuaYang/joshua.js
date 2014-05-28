@@ -68,8 +68,8 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 
 	// set css properties
 	Scheme.prototype._setCss = function(){
-		this.$element.find('div, img').css('display', 'none');
-		this.$element.find('img, canvas').css('width', '100%');
+		this.$element.find('div').css('display', 'none');
+		this.$element.find('canvas').css('width', '100%');
 	}
 
 	// set options and do next
@@ -168,28 +168,10 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 			return;
 		}
 
-		var ss = scope.$element.find("[js-source='" + scope._texture + "']");
-		if(ss.length > 0){
-			scope._img = Picture.get(ss)._texture;
+		scope._img = $('<img>').one('load', function(){
 			scope._loaded = true;
-			console.log(scope._img);
-
-			setTimeout(function(){
-				$scope.trigger('loaded');
-			}, 50);
-		}else{
-			scope._img = new Image();
-
-			scope._img.onload = function(){
-				scope._loaded = true;
-
-				setTimeout(function(){
-					$scope.trigger('loaded');
-				}, 50);
-			}
-			scope._img.alt = "";
-			scope._img.src = scope._texture;
-		}
+			$scope.trigger('loaded');
+		}).attr('src', scope._texture)[0];
 	}
 
 	// render frame animation, and check if reach end or should loop

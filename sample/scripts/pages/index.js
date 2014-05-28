@@ -56,7 +56,7 @@ define(['jquery', 'joshua/ui/Sprite', 'joshua/ui/Picture', 'joshua/test', 'domRe
 		});
 
 		$(s1).on('loaded', function(){
-			//console.log('loaded');
+			console.log('loaded');
 		}).on('done', function(){
 			//console.log('done');
 		});
