@@ -80,8 +80,6 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax'], funct
 		var scope = this;
 
 		scope._texture = $('<img>').one('load', function(){
-			scope._width = scope._texture.width;
-			scope._height = scope._texture.height;
 			scope._loaded = true;
 
 			scope._render();
@@ -95,9 +93,9 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax'], funct
 		this._beforeAnimate();
 
 		if(this._renderCanvas){
-			this._canvas = $('<canvas width="' + this._width + '" height="' + this._height + '">').appendTo(this.$element);
+			this._canvas = $('<canvas width="' + this._texture.width + '" height="' + this._texture.height + '">').appendTo(this.$element);
 			this._context = this._canvas[0].getContext("2d");
-			this._context.drawImage(this._texture, 0, 0,  this._width,  this._height);
+			this._context.drawImage(this._texture, 0, 0,  this._texture.width,  this._texture.height);
 		}else{
 			this.$element.append(this._texture);
 		}
@@ -140,8 +138,6 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax'], funct
 		delete this._rendered;
 		delete this._renderCanvas;
 		delete this._texture;
-		delete this._width;
-		delete this._height;
 		delete this._canvas;
 		delete this._context;
 		delete this.$element;

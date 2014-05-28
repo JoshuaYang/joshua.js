@@ -35,7 +35,7 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		loop: false,
 		reverse: false,
 		fps: 24,
-		mode: Modernizr.canvas ? 'canvas' : 'shift'  // canvas & shift & background
+		mode: Modernizr.canvas ? 'canvas' : 'background'  // canvas & background
 	};
 
 	// get a sprite object
@@ -68,18 +68,7 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 	// set options and do next
 	Scheme.prototype._build = function(opts){
 		this._initProperty(opts);
-		
-		switch(this._mode){
-			case 'canvas':
-				this._initCanvas();
-				break;
-			case 'shift':
-				this._initShift();
-				break;
-			case 'background':
-				this._initBackground();
-				break;
-		}
+		this._prepare();	
 	}
 
 	// init properties
@@ -118,6 +107,18 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		this._loaded = false;
 	}
 
+	// prepare for resource
+	Scheme.prototype._prepare = function(){
+		switch(this._mode){
+			case 'canvas':
+				this._initCanvas();
+				break;
+			case 'background':
+				this._initBackground();
+				break;
+		}
+	}
+
 	// init canvas, get the context, load source image
 	Scheme.prototype._initCanvas = function(){
 		var scope = this,
@@ -139,14 +140,17 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		}	
 	}
 
-	// init shift
-	Scheme.prototype._initShift = function(){
-		alert('shift');
-	}
-
 	// init background
 	Scheme.prototype._initBackground = function(){
-		alert('background');
+		var scope = this,
+			$scope = $(scope);
+
+		scope.$element.css({
+			'background-image': 'url('+scope._texture+')',
+			'background-position': '0 0'
+		});
+		scope._loaded = true;
+		$scope.trigger('loaded');
 	}
 
 	// render frame animation, and check if reach end or should loop
@@ -186,14 +190,16 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		var xPos = this._currentIndex % this._cols;
 		var yPos = parseInt(this._currentIndex / this._cols);
 
+
 		switch(this._mode){
 			case 'canvas':
 				this._context.clearRect(0, 0, this._width, this._height);
 				this._context.drawImage(this._img, xPos * this._width, yPos * this._height, this._width, this._height, 0, 0, this._width, this._height);
-				break;
-			case 'shift':
-				break;
+				break;;
 			case 'background':
+				this.$element.css({
+					'background-position': -xPos * this._width + 'px ' + (-yPos * this._height + 'px')
+				});
 				break;
 		}
 	}
@@ -239,7 +245,7 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		if(!this._loaded) return;
 		if(!this._paused) return;
 		if(this._ended) return;
-		
+
 		this._paused = false;
 		this._renderFrames();
 	}
