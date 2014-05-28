@@ -43,7 +43,6 @@ define(['jquery', 'joshua/ui/Sprite', 'joshua/ui/Picture', 'joshua/test', 'domRe
 			frames: 14,
 			firstFrame: 0,
 			lastFrame: 13,
-			rows: 1,
 			cols: 14,
 			loop: false,
 			reverse: false,

@@ -21,7 +21,6 @@ var s1 = new Sprite('.js-sprite1', {
 	frames: 14,
 	firstFrame: 0,
 	lastFrame: 13,
-	rows: 1,
 	cols: 14,
 	loop: false,
 	reverse: false,
@@ -39,7 +38,6 @@ var s1 = new Sprite('.js-sprite1', {
 * `frames` - count of frames
 * `firstFrame` - the first frame to render [*default: 0*]
 * `lastFrame` - the last frame to render [*default: frames - 1*]
-* `rows` - rows of frame image [*default: 1*]
 * `cols` - cols of frame image [*default: frames*]
 * `loop` - whether need to loop [*default: false*]
 * `reverse` - back to front [*default: false*]

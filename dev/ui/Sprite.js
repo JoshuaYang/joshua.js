@@ -31,7 +31,6 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 	Scheme._options = {
 		firstFrame: 0,
 		//lastFrame: ,
-		rows: 1,
 		//cols: ,
 		loop: false,
 		reverse: false,
@@ -81,7 +80,6 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 			frames: this.$element.attr('js-frames'),
 			firstFrame: this.$element.attr('js-first-frame'),
 			lastFrame: this.$element.attr('js-last-frame'),
-			rows: this.$element.attr('js-rows'),
 			cols: this.$element.attr('js-cols'),
 			loop: this.$element.attr('js-loop') == 'true',
 			reverse: this.$element.attr('js-reverse') == 'true',
@@ -94,7 +92,6 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		this._frames = options.frames;
 		this._firstFrame = options.firstFrame;
 		this._lastFrame = options.lastFrame ? options.lastFrame : this._frames - 1;
-		this._rows = options.rows;
 		this._cols = options.cols ? options.cols : this._frames;
 		this._loop = options.loop;
 		this._reverse = options.reverse;
@@ -179,7 +176,6 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		delete this._frames;
 		delete this._firstFrame;
 		delete this._lastFrame;
-		delete this._rows;
 		delete this._cols;
 		delete this._loop;
 		delete this._reverse;
@@ -249,7 +245,6 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		this._frames = opts.frames ? opts.frames : this._frames;
 		this._firstFrame = opts.firstFrame ? opts.firstFrame : 0;
 		this._lastFrame = opts.lastFrame ? opts.lastFrame : this._frames - 1;
-		this._rows = opts.rows ? opts.rows : 1;
 		this._cols = opts.cols ? opts.cols : this._frames;
 		this._loop = opts.loop ? opts.loop : false;
 		this._reverse = opts.reverse ? opts.reverse : false;
