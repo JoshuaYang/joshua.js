@@ -61,18 +61,9 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax'], funct
 
 	// set options
 	Scheme.prototype._initProperty = function(){
-		var options = $.extend({}, Scheme._options, {
-			enterAnimate: this.$element.attr('js-enter-animate') == 'true',
-			enterDuration: this.$element.attr('js-enter-duration')
-		});
-
 		this._source = this.$element.attr('js-source');
-		this._enterAnimate = options.enterAnimate;
-		this._enterDuration = options.enterDuration;
-
 		this._loaded = false;
 		this._rendered = false;
-		this._renderCanvas = Modernizr.canvas;
 	}
 
 	// load image source
@@ -90,9 +81,7 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax'], funct
 
 	// render image
 	Scheme.prototype._render = function(){
-		this._beforeAnimate();
-
-		if(this._renderCanvas){
+		if(Modernizr.canvas){
 			this._canvas = $('<canvas width="' + this._texture.width + '" height="' + this._texture.height + '">').appendTo(this.$element);
 			this._context = this._canvas[0].getContext("2d");
 			this._context.drawImage(this._texture, 0, 0,  this._texture.width,  this._texture.height);
@@ -102,41 +91,14 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax'], funct
 
 		this._rendered = true;
 		$(this).trigger('done');
-
-		this._animate();
-	}
-
-	// pretreatment for animate
-	Scheme.prototype._beforeAnimate = function(){
-		if(!this._enterAnimate){
-			return;
-		}
-
-		TweenMax.set(this.$element, {
-			autoAlpha: 0
-		});
-	}
-
-	// do animate if exist
-	Scheme.prototype._animate = function(){
-		if(!this._enterAnimate){
-			return;
-		}
-
-		TweenMax.to(this.$element, this._enterDuration, {
-			autoAlpha: 1
-		});
 	}
 
 	// dispose resource of picture object
 	Scheme.prototype._dispose = function(){
 		$(this).off();
 		delete this._source;
-		delete this._enterAnimate;
-		delete this._enterDuration;
 		delete this._loaded;
 		delete this._rendered;
-		delete this._renderCanvas;
 		delete this._texture;
 		delete this._canvas;
 		delete this._context;
