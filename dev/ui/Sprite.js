@@ -34,7 +34,8 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		//cols: ,
 		loop: false,
 		reverse: false,
-		fps: 24
+		fps: 24,
+		mode: Modernizr.canvas ? 'canvas' : 'shift'  // canvas & shift & background
 	};
 
 	// get a sprite object
@@ -67,8 +68,18 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 	// set options and do next
 	Scheme.prototype._build = function(opts){
 		this._initProperty(opts);
-
-		this._initCanvas();
+		
+		switch(this._mode){
+			case 'canvas':
+				this._initCanvas();
+				break;
+			case 'shift':
+				this._initShift();
+				break;
+			case 'background':
+				this._initBackground();
+				break;
+		}
 	}
 
 	// init properties
@@ -83,7 +94,8 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 			cols: this.$element.attr('js-cols'),
 			loop: this.$element.attr('js-loop') == 'true',
 			reverse: this.$element.attr('js-reverse') == 'true',
-			fps: this.$element.attr('js-fps')
+			fps: this.$element.attr('js-fps'),
+			mode: this.$element.attr('js-mode')
 		}, opts);
 
 		this._width = options.width;
@@ -96,6 +108,7 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		this._loop = options.loop;
 		this._reverse = options.reverse;
 		this._fps = options.fps;
+		this._mode = options.mode;
 
 		this._currentIndex = this._reverse ? this._lastFrame : this._firstFrame;
 		this._timeDist = 1000 / this._fps;
@@ -124,6 +137,16 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 				$scope.trigger('loaded');
 			}).attr('src', scope._texture)[0];
 		}	
+	}
+
+	// init shift
+	Scheme.prototype._initShift = function(){
+		alert('shift');
+	}
+
+	// init background
+	Scheme.prototype._initBackground = function(){
+		alert('background');
 	}
 
 	// render frame animation, and check if reach end or should loop
@@ -163,8 +186,16 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		var xPos = this._currentIndex % this._cols;
 		var yPos = parseInt(this._currentIndex / this._cols);
 
-		this._context.clearRect(0, 0, this._width, this._height);
-		this._context.drawImage(this._img, xPos * this._width, yPos * this._height, this._width, this._height, 0, 0, this._width, this._height);
+		switch(this._mode){
+			case 'canvas':
+				this._context.clearRect(0, 0, this._width, this._height);
+				this._context.drawImage(this._img, xPos * this._width, yPos * this._height, this._width, this._height, 0, 0, this._width, this._height);
+				break;
+			case 'shift':
+				break;
+			case 'background':
+				break;
+		}
 	}
 
 	// dispose resource of sprite object
@@ -190,6 +221,7 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		delete this._canvas;
 		delete this._context;
 		delete this._img;
+		delete this._mode;
 	}
 
 	// pause the animation at current frame
@@ -198,7 +230,6 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		if(this._paused) return;
 		if(this._ended) return;
 		
-		console.log('===pause===');
 		this._paused = true;
 		clearTimeout(this._st);
 	}
@@ -209,7 +240,6 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		if(!this._paused) return;
 		if(this._ended) return;
 		
-		console.log('===play===');
 		this._paused = false;
 		this._renderFrames();
 	}
@@ -219,7 +249,6 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		if(!this._loaded) return;
 		if(!this._paused) return;
 
-		console.log('===replay===');
 		this._currentIndex = this._reverse ? this._lastFrame : this._firstFrame;
 		this._paused = false;
 		this._ended = false;
@@ -257,7 +286,7 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		this._ended = false;
 		this._loaded = false;
 
-		this._initCanvas();
+		this._prepare();
 	}
 
 

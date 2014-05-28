@@ -371,7 +371,8 @@ body {
   background-color: black;
 }
 #sprite .js-sprite1 {
-  width: 320px;
+  width: 300px;
+  height: 291px;
 }
 #picture {
   background-color: pink;
