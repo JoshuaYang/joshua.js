@@ -5,19 +5,11 @@ display sequence images.
 ## html format：
 ```html
 <!-- the wrapper -->
-<div class="js-sprite js-sprite1" js-loop="true" js-texture="img/cursorFrames.png">
+<div class="js-sprite js-sprite1">
     <!-- add images that will be used -->
     <!-- nothing will still be ok, but may be slower -->
-    <img src="img/cursorFrames.png" alt="">
+    <div class="js-picture js-picture01" js-source="images/sprite/enter-ani.png"></div>
 </div>
-```
-
-## less format:
-just set the width property of wrapper
-```css
-.js-sprite1{
-	width: 320px;
-}
 ```
 
 ## usage:
@@ -25,31 +17,25 @@ just set the width property of wrapper
 var s1 = new Sprite('.js-sprite1', {
     width: 320,
     height: 238,
-	texture: 'img/cursorFrames.png',
-	staticSource: 'img/cursorStatic.png',
-	frames: 72,
+	texture: 'images/sprite/enter-ani.png'
+	frames: 14,
 	firstFrame: 0,
-	lastFrame: 71,
-	rows: 3,
-	cols: 24,
+	lastFrame: 13,
+	rows: 1,
+	cols: 14,
 	loop: false,
 	reverse: false,
-	fps: 24,
-	cWidth: 320,
-	cHeight: 238,
-	offsetX: 0,
-	offsetY: 0
+	fps: 24
 });
 ```
-* `width`, `height`, `texture`, `staticSource`, `frames` these properties are necessary.
+* `width`, `height`, `texture`, `frames` these properties are necessary.
 * you can also set properties in html. use `js-` prefix, all upper-words should change to `-` plus lower words.
-  * eg. 'cWidth'  ===>>>  js-c-width="320"
+  * eg. 'firstFrame'  ===>>>  js-first-frame="320"
 
 ## constructor options:
 * `width` - width of each frame
 * `height` - height of each frame
 * `texture` - frames image path
-* `staticSource` - if browser doesn't support canvas, the static image will be used
 * `frames` - count of frames
 * `firstFrame` - the first frame to render [*default: 0*]
 * `lastFrame` - the last frame to render [*default: frames - 1*]
@@ -58,10 +44,6 @@ var s1 = new Sprite('.js-sprite1', {
 * `loop` - whether need to loop [*default: false*]
 * `reverse` - back to front [*default: false*]
 * `fps` - the fps of frames [*default: 24*]
-* `cWidth` - width of canvas (**can be set once only when object is created**) [*default: width*]
-* `cHeight` - height of canvas (**can be set once only when object is created**) [*default: height*]
-* `offsetX` - X offset of frame in canvas [*default: 0*]
-* `offsetY` - Y offset of frmae in canvas [*default: 0*]
 
 ## static method:
 * `get(elem)` - get Sprite object
@@ -75,8 +57,8 @@ var s1 = new Sprite('.js-sprite1', {
 * `replay()` - replay the paused frames animation
 * `seekTo(index)` - jump to the specified frame 
 	* index: the frame which will jump to
-* `config(opts)` - config Sprite object with new options (**except `cWidth`, `cHeight` and `staticSource`**)
-	* opts: same as the constructor options, without `cWidth`, `cHeight` and `staticSource`
+* `config(opts)` - config Sprite object with new options (**except `width`, `height`**)
+	* opts: same as the constructor options, without `width`, `height`
 
 ## event:
 * `loaded` - trigger when source imgage loaded

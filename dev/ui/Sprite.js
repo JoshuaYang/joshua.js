@@ -35,13 +35,7 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		//cols: ,
 		loop: false,
 		reverse: false,
-		fps: 24,
-		//cWidth: ,
-		//cHeight: ,
-		offsetX: 0,
-		offsetY: 0,
-		onInitialized: null,
-		onFinished: null
+		fps: 24
 	};
 
 	// get a sprite object
@@ -69,20 +63,13 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 	// set css properties
 	Scheme.prototype._setCss = function(){
 		this.$element.find('div').css('display', 'none');
-		this.$element.find('canvas').css('width', '100%');
 	}
 
 	// set options and do next
 	Scheme.prototype._build = function(opts){
 		this._initProperty(opts);
 
-		if(!this._renderCanvas){
-			this._renderStatic();
-			return;
-		}
-
-		this._initStage();
-		this._loadResource();
+		this._initCanvas();
 	}
 
 	// init properties
@@ -91,7 +78,6 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 			width: this.$element.attr('js-width'),
 			height: this.$element.attr('js-height'),
 			texture: this.$element.attr('js-texture'),
-			staticSource: this.$element.attr('js-static-source'),
 			frames: this.$element.attr('js-frames'),
 			firstFrame: this.$element.attr('js-first-frame'),
 			lastFrame: this.$element.attr('js-last-frame'),
@@ -99,17 +85,12 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 			cols: this.$element.attr('js-cols'),
 			loop: this.$element.attr('js-loop') == 'true',
 			reverse: this.$element.attr('js-reverse') == 'true',
-			fps: this.$element.attr('js-fps'),
-			cWidth: this.$element.attr('js-c-width'),
-			cHeight: this.$element.attr('js-c-height'),
-			offsetX: this.$element.attr('js-offset-x'),
-			offsetY: this.$element.attr('js-offset-y')
+			fps: this.$element.attr('js-fps')
 		}, opts);
 
 		this._width = options.width;
 		this._height = options.height;
 		this._texture = options.texture;
-		this._staticSource = options.staticSource;
 		this._frames = options.frames;
 		this._firstFrame = options.firstFrame;
 		this._lastFrame = options.lastFrame ? options.lastFrame : this._frames - 1;
@@ -118,10 +99,6 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		this._loop = options.loop;
 		this._reverse = options.reverse;
 		this._fps = options.fps;
-		this._cWidth = options.cWidth ? options.cWidth : this._width;
-		this._cHeight = options.cHeight ? options.cHeight : this._height;
-		this._offsetX = options.offsetX;
-		this._offsetY = options.offsetY;
 
 		this._currentIndex = this._reverse ? this._lastFrame : this._firstFrame;
 		this._timeDist = 1000 / this._fps;
@@ -129,49 +106,27 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		this._paused = true;
 		this._ended = false;
 		this._loaded = false;
-		this._renderCanvas = Modernizr.canvas;
 	}
 
-	// show static image, only when browser doesn't support canvas
-	Scheme.prototype._renderStatic = function(){
-		var scope = this;
-
-		var img = scope.$element.find("img[src='" + scope._staticSource + "']");
-		if(img.length > 0){
-			img.css('display', 'block');
-		}else{
-			var ti = new Image();
-			ti.onload = function(){
-				ti.style.display = 'block';
-				scope.$element.append(ti);
-			}
-			ti.src = scope._staticSource;
-		}
-	}
-
-	// init canvas, and get the context
-	Scheme.prototype._initStage = function(){
-		var scope = this;
-
-		scope._canvas = $('<canvas width="' + scope._cWidth + '" height="' + scope._cHeight + '">').css('width', '100%').appendTo(scope.$element)[0];
-		scope._context = scope._canvas.getContext("2d");
-	}
-
-	// load resource image
-	Scheme.prototype._loadResource = function(){
-		var scope = this;
+	// init canvas, get the context, load source image
+	Scheme.prototype._initCanvas = function(){
+		var scope = this,
 			$scope = $(scope);
+
+		if(!scope._canvas){
+			scope._canvas = $('<canvas width="' + scope._width + '" height="' + scope._height + '">').appendTo(scope.$element)[0];
+			scope._context = scope._canvas.getContext("2d");
+		}
 
 		//source exists and loaded
 		if(scope._img && scope._img.src.indexOf(scope._texture) != -1){
 			scope._loaded = true;
-			return;
-		}
-
-		scope._img = $('<img>').one('load', function(){
-			scope._loaded = true;
-			$scope.trigger('loaded');
-		}).attr('src', scope._texture)[0];
+		}else{
+			scope._img = $('<img>').one('load', function(){
+				scope._loaded = true;
+				$scope.trigger('loaded');
+			}).attr('src', scope._texture)[0];
+		}	
 	}
 
 	// render frame animation, and check if reach end or should loop
@@ -211,18 +166,16 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		var xPos = this._currentIndex % this._cols;
 		var yPos = parseInt(this._currentIndex / this._cols);
 
-		this._context.clearRect(0, 0, this._cWidth, this._cHeight);
-		this._context.drawImage(this._img, xPos * this._width, yPos * this._height, this._width, this._height, this._offsetX, this._offsetY, this._width, this._height);
+		this._context.clearRect(0, 0, this._width, this._height);
+		this._context.drawImage(this._img, xPos * this._width, yPos * this._height, this._width, this._height, 0, 0, this._width, this._height);
 	}
 
 	// dispose resource of sprite object
 	Scheme.prototype._dispose = function(){
 		$(this).off();
 		delete this._width;
-		delete this._width;
 		delete this._height;
 		delete this._texture;
-		delete this._staticSource;
 		delete this._frames;
 		delete this._firstFrame;
 		delete this._lastFrame;
@@ -231,17 +184,12 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		delete this._loop;
 		delete this._reverse;
 		delete this._fps;
-		delete this._cWidth;
-		delete this._cHeight;
-		delete this._offsetX;
-		delete this._offsetY;
 		delete this._currentIndex;
 		delete this._timeDist;
 		delete this._st;
 		delete this._paused;
 		delete this._ended;
 		delete this._loaded;
-		delete this._renderCanvas;
 		delete this.$element;
 		delete this._canvas;
 		delete this._context;
@@ -250,7 +198,6 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 
 	// pause the animation at current frame
 	Scheme.prototype.pause = function(){
-		if(!this._renderCanvas) return;
 		if(!this._loaded) return;
 		if(this._paused) return;
 		if(this._ended) return;
@@ -262,7 +209,6 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 
 	// play the animation from current frame
 	Scheme.prototype.play = function(){
-		if(!this._renderCanvas) return;
 		if(!this._loaded) return;
 		if(!this._paused) return;
 		if(this._ended) return;
@@ -274,7 +220,6 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 
 	// replay the paused or finished animation from the first frame
 	Scheme.prototype.replay = function(){
-		if(!this._renderCanvas) return;
 		if(!this._loaded) return;
 		if(!this._paused) return;
 
@@ -287,8 +232,6 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 
 	// jump to the specified frame
 	Scheme.prototype.seekTo = function(index){
-		if(!this._renderCanvas) return;
-
 		this._ended = false;
 		this.pause();
 
@@ -300,11 +243,8 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 
 	// config Scheme object with new options
 	Scheme.prototype.config = function(opts){
-		if(!this._renderCanvas) return;
 		if(!this._paused) return;
 
-		this._width = opts.width ? opts.width : this._width;
-		this._height = opts.height ? opts.height : this._height;
 		this._texture = opts.texture ? opts.texture : this._texture;
 		this._frames = opts.frames ? opts.frames : this._frames;
 		this._firstFrame = opts.firstFrame ? opts.firstFrame : 0;
@@ -314,8 +254,6 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		this._loop = opts.loop ? opts.loop : false;
 		this._reverse = opts.reverse ? opts.reverse : false;
 		this._fps = opts.fps ? opts.fps : 24;
-		this._offsetX = opts.offsetX ? opts.offsetX : 0;
-		this._offsetY = opts.offsetY ? opts.offsetY : 0;
 
 		this._currentIndex = this._reverse ? this._lastFrame : this._firstFrame;
 		this._timeDist = 1000 / this._fps;
@@ -324,7 +262,7 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		this._ended = false;
 		this._loaded = false;
 
-		this._loadResource();
+		this._initCanvas();
 	}
 
 

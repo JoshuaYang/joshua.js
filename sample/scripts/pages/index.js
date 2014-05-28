@@ -37,22 +37,17 @@ define(['jquery', 'joshua/ui/Sprite', 'joshua/ui/Picture', 'joshua/test', 'domRe
 	var s1;
 	function frameAnimation(){
 		s1 = new Sprite('.js-sprite1', {
-			width: 320,
-			height: 238,
-			texture: 'images/sprite/cursorFrames.png',
-			staticSource: 'images/sprite/cursorStatic.png',
-			frames: 72,
+			width: 300,
+			height: 291,
+			texture: 'images/sprite/enter-ani.png',
+			frames: 14,
 			firstFrame: 0,
-			lastFrame: 71,
-			rows: 3,
-			cols: 24,
+			lastFrame: 13,
+			rows: 1,
+			cols: 14,
 			loop: false,
 			reverse: false,
-			fps: 24,
-			cWidth: 320,
-			cHeight: 238,
-			offsetX: 0,
-			offsetY: 0
+			fps: 24
 		});
 
 		$(s1).on('loaded', function(){
@@ -76,14 +71,10 @@ define(['jquery', 'joshua/ui/Sprite', 'joshua/ui/Picture', 'joshua/test', 'domRe
 
 	$('#sprite #config').on('click', function(){
 		s1.config({
-			width: 58,
-			height: 52,
-			frames: 29,
-			texture: 'images/sprite/arrowFrames.png',
+			texture: 'images/sprite/left-ani.png',
+			frames: 32,
 			loop: false,
-			reverse: true,
-			offsetX: 50,
-			offsetY: 50
+			reverse: false
 		});
 
 		$(s1).off('loaded').on('loaded', function(){
