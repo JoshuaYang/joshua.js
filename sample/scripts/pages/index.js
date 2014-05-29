@@ -8,8 +8,9 @@ define(['jquery', 'joshua/ui/Sprite', 'joshua/ui/Picture', 'joshua/test', 'domRe
 
 			$(p).on('done', function(){
 				//console.log(i);
+				alert(i);
 			}).on('error', function(){
-				//console.log('error');
+				//alert('error');
 			});
 		});
 	}
@@ -50,9 +51,9 @@ define(['jquery', 'joshua/ui/Sprite', 'joshua/ui/Picture', 'joshua/test', 'domRe
 		});
 
 		$(s1).on('loaded', function(){
-			//console.log('loaded');
+			//alert('loaded');
 		}).on('done', function(){
-			//console.log('done');
+			//alert('done');
 		});
 	}
 

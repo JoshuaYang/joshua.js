@@ -72,7 +72,7 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax'], funct
 
 		scope._texture = $('<img>').one('load', function(){
 			scope._loaded = true;
-
+			scope._texture = this;// fixed ie8
 			scope._render();
 		}).on('error', function(){
 			$(scope).trigger('error');
@@ -81,16 +81,21 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax'], funct
 
 	// render image
 	Scheme.prototype._render = function(){
-		if(Modernizr.canvas){
-			this._canvas = $('<canvas width="' + this._texture.width + '" height="' + this._texture.height + '">').appendTo(this.$element);
-			this._context = this._canvas[0].getContext("2d");
-			this._context.drawImage(this._texture, 0, 0,  this._texture.width,  this._texture.height);
-		}else{
-			this.$element.append(this._texture);
-		}
+		var scope = this,
+			$scope = $(scope);
 
-		this._rendered = true;
-		$(this).trigger('done');
+		if(Modernizr.canvas){
+			scope._renderer = $('<canvas width="' + scope._texture.width + '" height="' + scope._texture.height + '">').appendTo(scope.$element);
+			scope._context = scope._renderer[0].getContext("2d");
+			scope._context.drawImage(scope._texture, 0, 0,  scope._texture.width,  scope._texture.height);
+		}else{
+			scope._renderer = $('<img src="' + scope._source + '" alt="">').appendTo(scope.$element);
+		}
+		scope._rendered = true;
+		
+		setTimeout(function(){
+			$scope.trigger('done');	
+		}, 50);
 	}
 
 	// dispose resource of picture object
@@ -100,7 +105,7 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax'], funct
 		delete this._loaded;
 		delete this._rendered;
 		delete this._texture;
-		delete this._canvas;
+		delete this._renderer;
 		delete this._context;
 		delete this.$element;
 	}

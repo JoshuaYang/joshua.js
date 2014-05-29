@@ -150,7 +150,11 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 			'background-position': '0 0'
 		});
 		scope._loaded = true;
-		$scope.trigger('loaded');
+
+		setTimeout(function(){
+			$scope.trigger('loaded');
+		}, 50);
+		
 	}
 
 	// render frame animation, and check if reach end or should loop
