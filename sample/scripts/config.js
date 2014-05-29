@@ -14,16 +14,6 @@
     while (method = methods.pop()) con[method] = con[method] || dummy;
 })(window.console = window.console || {});
 
-// if (!Array.prototype.indexOf) {
-//     Array.prototype.indexOf = function(obj) {
-//         for (var i = 0, il = this.length; i < il; i++) {
-//             if (this[i] == obj) {
-//                 return i;
-//             }
-//         }
-//     };
-// }
-
 require.config({
     baseUrl: './',
     waitSeconds: 0,

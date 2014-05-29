@@ -15,7 +15,7 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax'], funct
 			Scheme._instances.push(this);
 
 			this.$element = $(element);
-			this._build();
+			this._initProperty();
 		}
 	});
 
@@ -45,18 +45,21 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax'], funct
 
 	// remove and dispose frame object
 	Scheme.remove = function(instance){
-		var index = Scheme._instances.indexOf(instance);
-		if (index >= 0) {
-	        Scheme._instances.splice(index, 1);
-	        instance._dispose();
-	        instance = null;
-	    }
+		for(var i = 0; i < Scheme._instances.length; ++i){
+			if(Scheme._instances[i] == instance){
+				Scheme._instances.splice(i, 1);
+				instance._dispose();
+				instance = null;
+				break;
+			}
+		}
 	}
 
-	// set options and do next
-	Scheme.prototype._build = function(){
-		this._initProperty();
-		this._load();
+	// start to load all pictures
+	Scheme.load = function(){
+		for(var i = 0; i < Scheme._instances.length; ++i){
+			Scheme._instances[i]._load();
+		}
 	}
 
 	// set options
@@ -91,11 +94,9 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax'], funct
 		}else{
 			scope._renderer = $('<img src="' + scope._source + '" alt="">').appendTo(scope.$element);
 		}
+
 		scope._rendered = true;
-		
-		setTimeout(function(){
-			$scope.trigger('done');	
-		}, 50);
+		$scope.trigger('done');	
 	}
 
 	// dispose resource of picture object

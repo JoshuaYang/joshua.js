@@ -7,16 +7,17 @@ define(['jquery', 'joshua/ui/Sprite', 'joshua/ui/Picture', 'joshua/test', 'domRe
 			var p = new Picture(item);
 
 			$(p).on('done', function(){
-				//console.log(i);
-				alert(i);
+				//alert(i);
 			}).on('error', function(){
 				//alert('error');
 			});
 		});
+
+		Picture.load();
 	}
 
 	$('#picture #get').on('click', function(){
-		console.log(Picture.get('.js-picture1'));
+		alert(Picture.get('.js-picture1'));
 	});
 
 	$('#picture #remove').on('click', function(){
@@ -55,6 +56,8 @@ define(['jquery', 'joshua/ui/Sprite', 'joshua/ui/Picture', 'joshua/test', 'domRe
 		}).on('done', function(){
 			//alert('done');
 		});
+
+		Sprite.load();
 	}
 
 	$('#sprite #play').on('click', function(){
@@ -77,12 +80,13 @@ define(['jquery', 'joshua/ui/Sprite', 'joshua/ui/Picture', 'joshua/test', 'domRe
 			reverse: false
 		});
 
-		$(s1).off('loaded').on('loaded', function(){
-			//console.log('loaded2');
+		$(s1).off().on('loaded', function(){
+			//alert('loaded2');
+		}).on('done', function(){
+			//alert('done2');
 		});
-		$(s1).off('done').on('done', function(){
-			//console.log('done2');
-		});
+
+		Sprite.load();
 	})
 
 	$('#sprite #seekTo').on('click', function(){
@@ -90,7 +94,7 @@ define(['jquery', 'joshua/ui/Sprite', 'joshua/ui/Picture', 'joshua/test', 'domRe
 	})
 
 	$('#sprite #get').on('click', function(){
-		console.log(Sprite.get('.js-sprite1'));
+		alert(Sprite.get('.js-sprite1'));
 	});
 
 	$('#sprite #remove').on('click', function(){

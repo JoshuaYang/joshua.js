@@ -24,9 +24,18 @@ var s1 = new Sprite('.js-sprite1', {
 	cols: 14,
 	loop: false,
 	reverse: false,
-	fps: 24
+	fps: 24,
+    mode: 'canvas'
 });
+$(s1).on('loaded', function(){
+    //...
+}).on('done', function(){
+    //...
+});
+
+Sprite.load();
 ```
+* call `Sprite.load()` is necessary.
 * `width`, `height`, `texture`, `frames` these properties are necessary.
 * you can also set properties in html. use `js-` prefix, all upper-words should change to `-` plus lower words.
   * eg. 'firstFrame'  ===>>>  js-first-frame="320"
@@ -42,12 +51,14 @@ var s1 = new Sprite('.js-sprite1', {
 * `loop` - whether need to loop [*default: false*]
 * `reverse` - back to front [*default: false*]
 * `fps` - the fps of frames [*default: 24*]
+* `mode` - how to render frames (`'canvas'` or `'background'`) [*if browser support canvas, then will use, otherwise will use background*]
 
 ## static method:
 * `get(elem)` - get Sprite object
 	* elem: selector or dom element
 * `remove(instance)` - remove Sprite object, and dispose all relatived resources
 	* instance: Sprite object
+* `load()` - start to load resources
 
 ## object method:
 * `pause()` - pause the playing frames animation
@@ -55,8 +66,8 @@ var s1 = new Sprite('.js-sprite1', {
 * `replay()` - replay the paused frames animation
 * `seekTo(index)` - jump to the specified frame 
 	* index: the frame which will jump to
-* `config(opts)` - config Sprite object with new options (**except `width`, `height`**)
-	* opts: same as the constructor options, without `width`, `height`
+* `config(opts)` - config Sprite object with new options (**except `width`, `height` and `mode`**)
+	* opts: same as the constructor options, without `width`, `height` and `mode`
 
 ## event:
 * `loaded` - trigger when source imgage loaded

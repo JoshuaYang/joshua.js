@@ -6,19 +6,25 @@ preload image. If browser support canvas, will use `<canvas>`, otherwise will us
 ```html
 <!-- the wrapper -->
 <!-- all options define here -->
-<div class="js-picture js-picture1" js-source="images/picture/tio.jpg" js-enter-animate="true" js-enter-duration="0.5"></div>
+<div class="js-picture js-picture1" js-source="images/picture/tio.jpg"></div>
 ```
 * `source` property is necessary.
 
 ## usage:
 ```javascript
 var p = new Picture('js-picture1');
+$(p).on('done', function(){
+    //...
+}).on('error', function(){
+    //...
+});
+
+Picture.load();
 ```
+* call `Picture.load()` is necessary.
 
 ## constructor options:
 * `source` - image path
-* `enterAnimate` - whether need use enter animation [*default: false*]
-* `enterDuration` - duration time of enter animation [*default: 0.5*]
 
 
 ## static method:
@@ -26,6 +32,7 @@ var p = new Picture('js-picture1');
 	* elem: selector or dom element
 * `remove(instance)` - remove Picture object, and dispose all relatived resources
 	* instance: Picture object
+* `load()` - start to load resources
 
 ## event:
 * `done` - trigger when image is rendered

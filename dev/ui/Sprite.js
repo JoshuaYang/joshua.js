@@ -17,7 +17,7 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 			this.$element = $(element);
 			this._setCss();
 
-			this._build(opts);
+			this._initProperty(opts);
  		}
  	});
 
@@ -52,23 +52,26 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 
 	// remove and dispose sprite object
 	Scheme.remove = function(instance){
-		var index = Scheme._instances.indexOf(instance);
-		if (index >= 0) {
-	        Scheme._instances.splice(index, 1);
-	        instance._dispose();
-	        instance = null;
-	    }
+		for(var i = 0; i < Scheme._instances.length; ++i){
+			if(Scheme._instances[i] == instance){
+				Scheme._instances.splice(i, 1);
+				instance._dispose();
+				instance = null;
+				break;
+			}
+		}
+	}
+
+	// start to load all resources
+	Scheme.load = function(){
+		for(var i = 0; i < Scheme._instances.length; ++i){
+			Scheme._instances[i]._load();
+		}
 	}
 
 	// set css properties
 	Scheme.prototype._setCss = function(){
 		this.$element.find('div').css('display', 'none');
-	}
-
-	// set options and do next
-	Scheme.prototype._build = function(opts){
-		this._initProperty(opts);
-		this._prepare();	
 	}
 
 	// init properties
@@ -107,8 +110,7 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		this._loaded = false;
 	}
 
-	// prepare for resource
-	Scheme.prototype._prepare = function(){
+	Scheme.prototype._load = function(){
 		switch(this._mode){
 			case 'canvas':
 				this._initCanvas();
@@ -124,20 +126,20 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		var scope = this,
 			$scope = $(scope);
 
+		if(scope._loaded){
+			$scope.trigger('loaded');
+			return;
+		}
+
 		if(!scope._canvas){
 			scope._canvas = $('<canvas width="' + scope._width + '" height="' + scope._height + '">').appendTo(scope.$element)[0];
 			scope._context = scope._canvas.getContext("2d");
 		}
 
-		//source exists and loaded
-		if(scope._img && scope._img.src.indexOf(scope._texture) != -1){
+		scope._img = $('<img>').one('load', function(){
 			scope._loaded = true;
-		}else{
-			scope._img = $('<img>').one('load', function(){
-				scope._loaded = true;
-				$scope.trigger('loaded');
-			}).attr('src', scope._texture)[0];
-		}	
+			$scope.trigger('loaded');
+		}).attr('src', scope._texture)[0];
 	}
 
 	// init background
@@ -145,16 +147,18 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		var scope = this,
 			$scope = $(scope);
 
+		if(scope._loaded){
+			$scope.trigger('loaded');
+			return;
+		}
+
 		scope.$element.css({
-			'background-image': 'url('+scope._texture+')',
+			'background-image': 'url(' + scope._texture + ')',
 			'background-position': '0 0'
 		});
-		scope._loaded = true;
 
-		setTimeout(function(){
-			$scope.trigger('loaded');
-		}, 50);
-		
+		scope._loaded = true;
+		$scope.trigger('loaded');
 	}
 
 	// render frame animation, and check if reach end or should loop
@@ -234,6 +238,8 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		delete this._mode;
 	}
 
+	
+
 	// pause the animation at current frame
 	Scheme.prototype.pause = function(){
 		if(!this._loaded) return;
@@ -295,8 +301,6 @@ define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], functio
 		this._paused = true;
 		this._ended = false;
 		this._loaded = false;
-
-		this._prepare();
 	}
 
 
