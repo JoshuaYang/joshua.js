@@ -23,6 +23,8 @@ defaultOptions = {
 
 
 ## event
+``` javascript
 $(window).on("SmoothScroll",function(e){
 	console.log(e.scrollTop);
 });
+```

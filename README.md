@@ -5,3 +5,4 @@ a useful javascript library
 * Sprite - display sequence images
 * Picture - preload image source
 * Class - for object-oriented programming
+* SmoothMouseWheel - take over mouse wheel event, and make it smooth
