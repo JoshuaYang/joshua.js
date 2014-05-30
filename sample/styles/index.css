@@ -380,3 +380,6 @@ body {
 #picture .js-picture {
   display: inline-block;
 }
+#smooth_mousewheel {
+  background-color: green;
+}

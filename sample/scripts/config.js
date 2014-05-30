@@ -14,6 +14,12 @@
     while (method = methods.pop()) con[method] = con[method] || dummy;
 })(window.console = window.console || {});
 
+window.requestAnimFrame = (function() {
+    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(callback) {
+        window.setTimeout(callback, 1000 / 60);
+    };
+})();
+
 require.config({
     baseUrl: './',
     waitSeconds: 0,

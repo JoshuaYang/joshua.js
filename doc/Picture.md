@@ -1,4 +1,3 @@
-![joshua](https://raw.githubusercontent.com/JoshuaYang/joshua.js/master/res/picture.jpg)
 # Picture
 preload image. If browser support canvas, will use `<canvas>`, otherwise will use `<img>`.
 

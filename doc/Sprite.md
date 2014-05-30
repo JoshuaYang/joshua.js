@@ -1,4 +1,3 @@
-![joshua](https://raw.githubusercontent.com/JoshuaYang/joshua.js/master/res/sprite.jpg)
 # Sprite
 display sequence images.
 

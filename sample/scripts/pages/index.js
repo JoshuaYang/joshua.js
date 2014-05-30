@@ -1,5 +1,11 @@
-define(['jquery', 'joshua/ui/Sprite', 'joshua/ui/Picture', 'joshua/test', 'domReady!'], function($, Sprite, Picture){
-	
+define(['jquery', 
+		'joshua/ui/Sprite', 
+		'joshua/ui/Picture', 
+		'joshua/interact/smooth_mousewheel', 
+		'joshua/test', 
+		'domReady!'], 
+	function($, Sprite, Picture, SmoothMouseWheel){
+
 	/* begin Picture */
 	var p1;
 	function preload(){
@@ -17,7 +23,7 @@ define(['jquery', 'joshua/ui/Sprite', 'joshua/ui/Picture', 'joshua/test', 'domRe
 	}
 
 	$('#picture #get').on('click', function(){
-		alert(Picture.get('.js-picture1'));
+		console.log(Picture.get('.js-picture1'));
 	});
 
 	$('#picture #remove').on('click', function(){
@@ -90,11 +96,11 @@ define(['jquery', 'joshua/ui/Sprite', 'joshua/ui/Picture', 'joshua/test', 'domRe
 	})
 
 	$('#sprite #seekTo').on('click', function(){
-		s1.seekTo($('#seekValue').val());
+		s1.seekTo($('#sprite #seekValue').val());
 	})
 
 	$('#sprite #get').on('click', function(){
-		alert(Sprite.get('.js-sprite1'));
+		console.log(Sprite.get('.js-sprite1'));
 	});
 
 	$('#sprite #remove').on('click', function(){
@@ -102,5 +108,36 @@ define(['jquery', 'joshua/ui/Sprite', 'joshua/ui/Picture', 'joshua/test', 'domRe
 	});
 
 	frameAnimation();
-	/* end Sprite */	
+	/* end Sprite */
+
+	/* begin SmoothMosueWheel */
+	$('#smooth_mousewheel #enable').on('click', function(){
+		SmoothMouseWheel.enable({
+			spring: .4,
+	        duration: 900,
+	        maxDetail: 40
+		});
+	});	
+
+	$('#smooth_mousewheel #disable').on('click', function(){
+		SmoothMouseWheel.disable();
+	});
+
+	$('#smooth_mousewheel #destroy').on('click', function(){
+		SmoothMouseWheel.destroy();
+	});
+
+	$('#smooth_mousewheel #lock').on('click', function(){
+		SmoothMouseWheel.lock();
+	});
+
+	$('#smooth_mousewheel #unlock').on('click', function(){
+		SmoothMouseWheel.unlock();
+	});
+
+	$('#smooth_mousewheel #scrollTo').on('click', function(){
+		SmoothMouseWheel.scrollTo($('#smooth_mousewheel #scrollToValue').val());
+	});
+
+	/* end SmoothMosueWheel */
 });
