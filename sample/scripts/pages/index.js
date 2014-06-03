@@ -110,6 +110,11 @@ define(['jquery',
 	frameAnimation();
 	/* end Sprite */
 
+
+
+
+
+
 	/* begin SmoothMosueWheel */
 	$('#smooth_mousewheel #enable').on('click', function(){
 		SmoothMouseWheel.enable({

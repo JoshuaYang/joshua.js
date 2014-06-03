@@ -123,6 +123,8 @@ define(["jquery"], function() {
         enable: function(options) {
             if(!this.$e) return;
 
+            this.isEnable = true;
+
             this._forceUpdate();
             if (!this.options || options) {
                 this.options = $.extend({}, defaultsOption, typeof options == 'object' && options);
@@ -136,6 +138,8 @@ define(["jquery"], function() {
 
         disable: function() {
             if(!this.$e) return;
+
+            this.isEnable = false;
 
             this.$e.off("mousewheel DOMMouseScroll", this._mousewheelEvent);
             window.cancelAnimationFrame(this.intervalId);
@@ -163,6 +167,7 @@ define(["jquery"], function() {
         scrollTo: function(top, duration, easing) {
             if(!this.$e) return;
             if(!this.options) return;
+            if(!this.isEnable) return;
 
             var scope = this,
                 lockState = this.isLock;
@@ -187,7 +192,7 @@ define(["jquery"], function() {
         SMOOTH_SCROLL : "SmoothScroll"
     };
 
-    window.requestAnimFrame = (function() {
+    window.requestAnimationFrame = (function() {
         return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(callback) {
             window.setTimeout(callback, 1000 / 60);
         };
