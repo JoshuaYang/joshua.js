@@ -1,12 +1,17 @@
 {
-  "name": "joshua.js`",
+  "name": "joshua.js",
   "version": "0.0.1",
+  "homepage": "https://github.com/JoshuaYang/joshua.js",
+  "authors": [
+    "ヨシュア <yss901025@gmail.com>"
+  ],
+  "description": "joshua.js",
+  "license": "MIT",
   "dependencies": {
-    "jquery": "~1.10.2",
+    "jquery": "~2.1.1",
     "requirejs": "latest",
     "modernizr": "~2.6.2",
     "requirejs-domready": "latest",
     "greensock": "latest"
   }
 }
-
