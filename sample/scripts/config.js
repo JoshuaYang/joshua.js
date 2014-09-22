@@ -24,7 +24,7 @@ require.config({
     baseUrl: './',
     waitSeconds: 0,
     paths: {
-        "jquery": "vendors/jquery/jquery",
+        "jquery": "vendors/jquery/dist/jquery.min",
         'domReady': 'vendors/requirejs-domready/domReady',
         'modernizr': 'vendors/modernizr/modernizr'
     },
