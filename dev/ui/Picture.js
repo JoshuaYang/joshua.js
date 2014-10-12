@@ -5,7 +5,7 @@
 
 define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax'], function($, Class){
 	// constructor method
-	var Scheme = Class.extend({
+	var Scheme = Class.extend({ 
 		init: function(element){
 			var instance = Scheme.get(element);
 			if(instance){
