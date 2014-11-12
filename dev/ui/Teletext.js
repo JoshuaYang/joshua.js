@@ -107,8 +107,6 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax', 'touch
 	Scheme.prototype._updateIndex = function(){
 		this._nextIndex = (this._currentIndex + 1) == this._length ? 0 : this._currentIndex + 1;
 		this._next2Index = (this._nextIndex + 1) == this._length ? 0 : this._nextIndex + 1;
-
-		console.log('current:' + this._currentIndex, 'next:' + this._nextIndex, 'next2:' + this._next2Index);
 	}
 
 	Scheme.prototype._startSwipe = function(distance){
@@ -167,8 +165,6 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax', 'touch
 		TweenMax.to(scope._items.eq(scope._next2Index), 0.8, $.extend({}, Scheme.next2Style, {delay: 0}));
 		TweenMax.to(scope._items.eq(scope._nextIndex), 0.8, $.extend({}, Scheme.nextStyle, {delay: 0.5}));
 		TweenMax.to(scope._items.eq(scope._currentIndex), 0.8, $.extend({}, Scheme.currentStyle, {delay: 1.0}));
-
-		
 	}
 
 
