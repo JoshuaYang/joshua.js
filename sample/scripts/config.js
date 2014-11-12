@@ -26,9 +26,13 @@ require.config({
     paths: {
         "jquery": "vendors/jquery/dist/jquery.min",
         'domReady': 'vendors/requirejs-domready/domReady',
-        'modernizr': 'vendors/modernizr/modernizr'
+        'modernizr': 'vendors/modernizr/modernizr',
+        'touchswipe': 'vendors/jquery-touchswipe/jquery.touchSwipe.min'
     },
     shim: {
+        'touchswipe': {
+            deps: ['jquery']
+        }
     }, 
     packages: [
         { name: 'greensock', main: '', location: 'vendors/greensock/src/uncompressed' },

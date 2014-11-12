@@ -2,9 +2,10 @@ define(['jquery',
 		'joshua/ui/Sprite', 
 		'joshua/ui/Picture', 
 		'joshua/interact/smooth_mousewheel', 
+		'joshua/ui/Teletext',
 		'joshua/test', 
 		'domReady!'], 
-	function($, Sprite, Picture, SmoothMouseWheel){
+	function($, Sprite, Picture, SmoothMouseWheel, Teletext){
 
 	/* begin Picture */
 	var p1;
@@ -145,4 +146,31 @@ define(['jquery',
 	});
 
 	/* end SmoothMosueWheel */
+
+
+
+
+
+
+
+
+
+	var t1;
+	t1 = new Teletext('.js-teletext', {});
+	t1.startAnimation();
+	setTimeout(function(){
+		t1.reset();
+	}, 3000);
+
+
+
+
+
+
+
+
+
+
+
+
 });

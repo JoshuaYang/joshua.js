@@ -12,6 +12,7 @@
     "requirejs": "latest",
     "modernizr": "~2.6.2",
     "requirejs-domready": "latest",
-    "greensock": "latest"
+    "greensock": "latest",
+    "jquery-touchswipe": "~1.6.6"
   }
 }
