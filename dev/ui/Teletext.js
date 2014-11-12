@@ -66,7 +66,7 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax', 'touch
 
 		this._options = options;
 		this._items = this.$element.find(this._options.items);
-		this.isAnimating = false;
+		this.canSwipe = true;
 
 		this._setCss();
 		this._initEvents();
@@ -114,16 +114,16 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax', 'touch
 	Scheme.prototype._startSwipe = function(distance){
 		var scope = this;
 
-		if(scope.isAnimating) return;
+		if(!scope.canSwipe) return;
 
-		scope.isAnimating = true;
+		scope.canSwipe = false;
 
 		TweenMax.to(scope._items.eq(scope._currentIndex), 0.6, {
 			x: distance,
 			autoAlpha: 0,
 			onComplete: function(){
 				setTimeout(function(){
-					scope.isAnimating = false;
+					scope.canSwipe = true;
 				}, 1000);
 
 				TweenMax.set(scope._items.eq(scope._currentIndex), Scheme.normalStyle);
@@ -139,6 +139,7 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax', 'touch
 	}
 
 	Scheme.prototype.reset = function(){
+		this.canSwipe = false;
 		this._currentIndex = 0;
 		this._updateIndex();
 
@@ -154,6 +155,10 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax', 'touch
 
 	Scheme.prototype.startAnimation = function(){
 		var scope = this;
+
+		setTimeout(function(){
+			scope.canSwipe = true;
+		}, 1800);
 
 		TweenMax.to(scope._items.eq(scope._next2Index), 0.8, $.extend({}, Scheme.next2Style, {delay: 0}));
 		TweenMax.to(scope._items.eq(scope._nextIndex), 0.8, $.extend({}, Scheme.nextStyle, {delay: 0.5}));

@@ -157,9 +157,10 @@ define(['jquery',
 
 	var t1;
 	t1 = new Teletext('.js-teletext', {});
-	t1.startAnimation();
+	t1.reset();
 	setTimeout(function(){
-		t1.reset();
+		t1.startAnimation();
+		
 	}, 3000);
 
 
