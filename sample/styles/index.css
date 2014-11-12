@@ -417,65 +417,66 @@ body {
 /* line 12, index.less */
 .joshua-js {
   padding: 1%;
+  overflow: hidden;
 }
-/* line 15, index.less */
+/* line 16, index.less */
 .joshua-js h2 {
   font-size: 40px;
   color: blue;
 }
-/* line 19, index.less */
+/* line 20, index.less */
 .joshua-js input {
   margin-bottom: 5px;
 }
-/* line 24, index.less */
+/* line 25, index.less */
 #teletext {
   overflow: hidden;
 }
-/* line 27, index.less */
+/* line 28, index.less */
 #teletext .js-teletext {
-  width: 400px;
-  height: 500px;
+  width: 80%;
+  height: 300px;
   outline: 5px dashed gray;
   margin: 20px auto;
 }
-/* line 34, index.less */
+/* line 35, index.less */
 #teletext .js-teletext .teletext-item:nth-child(1) {
   background-color: red;
 }
-/* line 37, index.less */
+/* line 38, index.less */
 #teletext .js-teletext .teletext-item:nth-child(2) {
   background-color: yellow;
 }
-/* line 40, index.less */
+/* line 41, index.less */
 #teletext .js-teletext .teletext-item:nth-child(3) {
   background-color: blue;
 }
-/* line 43, index.less */
+/* line 44, index.less */
 #teletext .js-teletext .teletext-item:nth-child(4) {
   background-color: green;
 }
-/* line 46, index.less */
+/* line 47, index.less */
 #teletext .js-teletext .teletext-item:nth-child(5) {
   background-color: pink;
 }
-/* line 53, index.less */
+/* line 54, index.less */
 #sprite {
   background-color: black;
 }
-/* line 56, index.less */
+/* line 57, index.less */
 #sprite .js-sprite1 {
   width: 300px;
   height: 291px;
 }
-/* line 62, index.less */
+/* line 63, index.less */
 #picture {
   background-color: pink;
 }
-/* line 65, index.less */
+/* line 66, index.less */
 #picture .js-picture {
   display: inline-block;
 }
-/* line 70, index.less */
+/* line 71, index.less */
 #smooth_mousewheel {
   background-color: green;
 }

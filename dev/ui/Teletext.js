@@ -158,12 +158,20 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax', 'touch
 
 		setTimeout(function(){
 			scope.canSwipe = true;
+			
+			if(scope._options.callback){
+				scope._options.callback();
+			}
 		}, 1800);
 
 		TweenMax.to(scope._items.eq(scope._next2Index), 0.8, $.extend({}, Scheme.next2Style, {delay: 0}));
 		TweenMax.to(scope._items.eq(scope._nextIndex), 0.8, $.extend({}, Scheme.nextStyle, {delay: 0.5}));
 		TweenMax.to(scope._items.eq(scope._currentIndex), 0.8, $.extend({}, Scheme.currentStyle, {delay: 1.0}));
+
+		
 	}
+
+
 
 	return Scheme;
 });
