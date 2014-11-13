@@ -158,7 +158,6 @@ define(['jquery',
 	var t1;
 	t1 = new Teletext('.js-teletext', {
 		callback: function(){
-			alert('over');
 		}
 	});
 	// t1.reset();

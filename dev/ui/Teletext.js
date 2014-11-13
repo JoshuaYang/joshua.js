@@ -23,7 +23,7 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax', 'touch
 		x: '0%',
 		y: '0%',
 		scale: 1,
-		rotation: '0deg'
+		rotationZ: '0deg'
 	};
 	Scheme.nextStyle = {
 		display: 'block',
@@ -32,7 +32,7 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax', 'touch
 		x: '0%',
 		y: '0%',
 		scale: 1,
-		rotation: '1.6deg'
+		rotationZ: '1.6deg'
 	};
 	Scheme.next2Style = {
 		display: 'block',
@@ -41,7 +41,7 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax', 'touch
 		x: '0%',
 		y: '0%',
 		scale: 1,
-		rotation: '3.2deg'
+		rotationZ: '3.2deg'
 	};
 	Scheme.normalStyle = {
 		'display': 'none',
@@ -50,14 +50,14 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax', 'touch
 		x: '0%',
 		y: '0%',
 		scale: 1,
-		rotation: '3.2deg'
+		rotationZ: '3.2deg'
 	};
 	Scheme.originStyle = {
 		display: 'block',
 		x: '180%',
 		y: '180%',
 		scale: 3,
-		rotation: '30deg'
+		rotationZ: '30deg'
 	};
 
 	// set options
