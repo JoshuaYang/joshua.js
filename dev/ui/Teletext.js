@@ -114,26 +114,19 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax', 'touch
 
 		if(!scope.canSwipe) return;
 
-		scope.canSwipe = false;
-
-		TweenMax.to(scope._items.eq(scope._currentIndex), 0.6, {
+		TweenMax.to(scope._items.eq(scope._currentIndex), 0.4, {
 			x: distance,
-			autoAlpha: 0,
-			onComplete: function(){
-				setTimeout(function(){
-					scope.canSwipe = true;
-				}, 1000);
-
-				TweenMax.set(scope._items.eq(scope._currentIndex), Scheme.normalStyle);
-
-				scope._currentIndex = scope._nextIndex;
-				scope._updateIndex();
-
-				TweenMax.to(scope._items.eq(scope._currentIndex), 1, Scheme.currentStyle);
-				TweenMax.to(scope._items.eq(scope._nextIndex), 1, Scheme.nextStyle);
-				TweenMax.to(scope._items.eq(scope._next2Index), 1, Scheme.next2Style);
-			}
+			autoAlpha: 0
 		});
+
+		TweenMax.set(scope._items.eq(scope._currentIndex), Scheme.normalStyle);
+
+		scope._currentIndex = scope._nextIndex;
+		scope._updateIndex();
+
+		TweenMax.to(scope._items.eq(scope._currentIndex), 0.5, Scheme.currentStyle);
+		TweenMax.to(scope._items.eq(scope._nextIndex), 0.5, Scheme.nextStyle);
+		TweenMax.to(scope._items.eq(scope._next2Index), 0.5, Scheme.next2Style);
 	}
 
 	Scheme.prototype.reset = function(){
