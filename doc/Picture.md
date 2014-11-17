@@ -3,36 +3,28 @@ preload image. If browser support canvas, will use `<canvas>`, otherwise will us
 
 ## html format：
 ```html
-<!-- the wrapper -->
-<!-- all options define here -->
-<div class="js-picture js-picture1" js-source="images/picture/tio.jpg"></div>
+<div class="js-picture" js-imgtype="bg" js-source="images/picture/tio.jpg"></div>
 ```
 * `source` property is necessary.
 
 ## usage:
 ```javascript
-var p = new Picture('js-picture1');
-$(p).on('done', function(){
-    //...
-}).on('error', function(){
-    //...
+Picture.preload({
+    onError: function(){},
+    onLoad: function(){},
+    onComplete: function(){}
 });
-
-Picture.load();
 ```
-* call `Picture.load()` is necessary.
 
-## constructor options:
-* `source` - image path
+## property:
+* `js-source` - image path
+* `js-imgtype` - declare only if want to render as background-image
 
 
 ## static method:
-* `get(elem)` - get Picture object
-	* elem: selector or dom element
-* `remove(instance)` - remove Picture object, and dispose all relatived resources
-	* instance: Picture object
-* `load()` - start to load resources
+* `preload()` - load all images
 
-## event:
-* `done` - trigger when image is rendered
-* `error` - trigger when cause error during load
+## options:
+* `onError` - call when cause error during load
+* `onLoad` - call when image is loaded
+* `onComplete` - call when all images are loaded

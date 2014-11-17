@@ -3,91 +3,72 @@
  * @date 2013/5/22
  */
 
-define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax'], function($, Class){
+define(['jquery', 'joshua/util/Class', 'modernizr'], function($, Class){
 	// constructor method
 	var Scheme = Class.extend({ 
 		init: function(element){
-			var instance = Scheme.get(element);
-			if(instance){
-				return instance;
-			}
-
-			Scheme._instances.push(this);
-
 			this.$element = $(element);
-			this._initProperty();
 		}
 	});
 
 	// class name of picture object
 	Scheme.className = "js-picture";
 
-	// alive object array
-	Scheme._instances = [];
-	
-	// default options
-	Scheme._options = {
-		enterAnimate: false,
-		enterDuration: 0.5
-	};
-
-	// get a picture object
-	Scheme.get = function(element){
-		var ele = $(element)[0];
-		for (var i = 0; i < Scheme._instances.length; ++i) {
-	        var instance = Scheme._instances[i];
-	        if (instance.$element && instance.$element[0] == ele) {
-	            return instance;
-	        }
-	    }
-	    return null;
-	}
-
-	// remove and dispose frame object
-	Scheme.remove = function(instance){
-		for(var i = 0; i < Scheme._instances.length; ++i){
-			if(Scheme._instances[i] == instance){
-				Scheme._instances.splice(i, 1);
-				instance._dispose();
-				instance = null;
-				break;
-			}
-		}
-	}
 
 	// start to load all pictures
-	Scheme.load = function(){
-		for(var i = 0; i < Scheme._instances.length; ++i){
-			Scheme._instances[i]._load();
+	Scheme.preload = function(options){
+		Scheme.options = options;
+
+		Scheme.items = $('.' + Scheme.className);
+		Scheme.totalCount = Scheme.items.length;
+		Scheme.loadCount = 0;
+
+		if(Scheme.totalCount == 0){
+			Scheme._doIfComplete();
+		}
+
+		Scheme.items.each(function(i, item){
+			new Scheme(item)._load();
+		});
+	}
+
+
+	// increase loaded count
+	Scheme._doIfComplete = function(){
+		++Scheme.loadCount;
+
+		if(Scheme.totalCount == 0 || Scheme.loadCount == Scheme.totalCount && Scheme.options.onComplete){
+			Scheme.options.onComplete();
 		}
 	}
 
-	// set options
-	Scheme.prototype._initProperty = function(){
-		this._source = this.$element.attr('js-source');
-		this._loaded = false;
-		this._rendered = false;
-	}
 
 	// load image source
 	Scheme.prototype._load = function(){
 		var scope = this;
+		scope._source = scope.$element.attr('js-source');
+		scope._imgtype = scope.$element.attr('js-imgtype');
 
 		scope._texture = $('<img>').one('load', function(){
-			scope._loaded = true;
 			scope._texture = this;// fixed ie8
 			scope._render();
 		}).on('error', function(){
-			$(scope).trigger('error');
+			Scheme._doIfComplete();
+
+			if(Scheme.options.onError){
+				Scheme.options.onError();
+			}
 		}).attr('src', scope._source)[0];
 	}
 
+
 	// render image
 	Scheme.prototype._render = function(){
-		var scope = this,
-			$scope = $(scope);
+		var scope = this;
 
-		if(Modernizr.canvas){
+		if(scope._imgtype == 'bg'){
+			scope.$element.css({ 'background-image': 'url('+ scope._source +')'});
+		}else if(Modernizr.canvas){
 			scope._renderer = $('<canvas width="' + scope._texture.width + '" height="' + scope._texture.height + '">').appendTo(scope.$element);
 			scope._context = scope._renderer[0].getContext("2d");
 			scope._context.drawImage(scope._texture, 0, 0,  scope._texture.width,  scope._texture.height);
@@ -95,20 +76,11 @@ define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax'], funct
 			scope._renderer = $('<img src="' + scope._source + '" alt="">').appendTo(scope.$element);
 		}
 
-		scope._rendered = true;
-		$scope.trigger('done');	
-	}
+		Scheme._doIfComplete();
 
-	// dispose resource of picture object
-	Scheme.prototype._dispose = function(){
-		$(this).off();
-		delete this._source;
-		delete this._loaded;
-		delete this._rendered;
-		delete this._texture;
-		delete this._renderer;
-		delete this._context;
-		delete this.$element;
+		if(Scheme.options.onLoad){
+			Scheme.options.onLoad();
+		}
 	}
 
 

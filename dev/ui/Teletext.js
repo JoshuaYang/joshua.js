@@ -3,7 +3,7 @@
  * @date 2013/5/22
  */
 
-define(['jquery', 'joshua/util/Class', 'modernizr', 'greensock/TweenMax', 'touchswipe'], function($, Class){
+define(['jquery', 'joshua/util/Class', 'greensock/TweenMax', 'touchswipe'], function($, Class){
 	// constructor method
 	var Scheme = Class.extend({ 
 		init: function(element, opts){

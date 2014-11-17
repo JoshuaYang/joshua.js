@@ -3,7 +3,7 @@
  * @date 2013/5/6
  */
 
-define(['jquery','joshua/ui/Picture', 'joshua/util/Class', 'modernizr'], function($, Picture, Class){
+define(['jquery', 'joshua/util/Class', 'modernizr'], function($, Class){
  	// constructor method
  	var Scheme = Class.extend({
  		init: function(element, opts){
