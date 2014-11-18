@@ -6,3 +6,4 @@ a useful javascript library
 * Picture - preload image source
 * Class - for object-oriented programming
 * SmoothMouseWheel - take over mouse wheel event, and make it smooth
+* Rain - generate random fall down elements
