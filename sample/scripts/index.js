@@ -28,9 +28,10 @@ require(['jquery',
         'joshua/ui/Picture', 
         'joshua/interact/smooth_mousewheel', 
         'joshua/ui/Teletext',
+        'joshua/ui/Rain',
         'joshua/test', 
         'domReady!'], 
-    function($, Sprite, Picture, SmoothMouseWheel, Teletext){
+    function($, Sprite, Picture, SmoothMouseWheel, Teletext, Rain){
 
     /* begin Picture */
     Picture.preload({
@@ -171,4 +172,20 @@ require(['jquery',
         t1.startAnimation();
     }, 0000);
 
+
+
+
+
+
+
+
+    // rain
+    new Rain($('#rain'), {
+        source: ['images/rain/yellow.png', 'images/rain/blue.png', 'images/rain/pink.png'],
+        count: 20,
+        minSpeed: 6,
+        maxSpeed: 10,
+        minDelay: 2,
+        maxDelay: 6
+    });
 });
