@@ -62,13 +62,9 @@ require(['jquery',
             cols: 14,
             loop: false,
             reverse: false,
-            fps: 24
-        });
-
-        $(s1).on('loaded', function(){
-            //alert('loaded');
-        }).on('done', function(){
-            //alert('done');
+            fps: 24,
+            onload: function(){},
+            ondone: function(){}
         });
 
         Sprite.load();
@@ -92,12 +88,6 @@ require(['jquery',
             frames: 32,
             loop: false,
             reverse: false
-        });
-
-        $(s1).off().on('loaded', function(){
-            //alert('loaded2');
-        }).on('done', function(){
-            //alert('done2');
         });
 
         Sprite.load();

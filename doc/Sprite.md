@@ -24,7 +24,9 @@ var s1 = new Sprite('.js-sprite1', {
 	loop: false,
 	reverse: false,
 	fps: 24,
-    mode: 'canvas'
+    mode: 'canvas',
+    onload: function(){},
+    ondone: function(){}
 });
 $(s1).on('loaded', function(){
     //...
@@ -51,6 +53,8 @@ Sprite.load();
 * `reverse` - back to front [*default: false*]
 * `fps` - the fps of frames [*default: 24*]
 * `mode` - how to render frames (`'canvas'` or `'background'`) [*if browser support canvas, then will use, otherwise will use background*]
+* `onload` - call when source image loaded
+* `ondone` - call when frame animation is finished
 
 ## static method:
 * `get(elem)` - get Sprite object
@@ -67,7 +71,3 @@ Sprite.load();
 	* index: the frame which will jump to
 * `config(opts)` - config Sprite object with new options (**except `width`, `height` and `mode`**)
 	* opts: same as the constructor options, without `width`, `height` and `mode`
-
-## event:
-* `loaded` - trigger when source imgage loaded
-* `done` - trigger when frame animation is finished

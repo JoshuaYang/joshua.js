@@ -101,6 +101,8 @@ define(['jquery', 'joshua/util/Class', 'modernizr'], function($, Class){
 		this._reverse = options.reverse;
 		this._fps = options.fps;
 		this._mode = options.mode;
+		this._onload = options.onload;
+		this._ondone = options.ondone;
 
 		this._currentIndex = this._reverse ? this._lastFrame : this._firstFrame;
 		this._timeDist = 1000 / this._fps;
@@ -127,7 +129,7 @@ define(['jquery', 'joshua/util/Class', 'modernizr'], function($, Class){
 			$scope = $(scope);
 
 		if(scope._loaded){
-			$scope.trigger('loaded');
+			if(scope._onload) scope._onload();
 			return;
 		}
 
@@ -138,7 +140,8 @@ define(['jquery', 'joshua/util/Class', 'modernizr'], function($, Class){
 
 		scope._img = $('<img>').one('load', function(){
 			scope._loaded = true;
-			$scope.trigger('loaded');
+
+			if(scope._onload) scope._onload();
 		}).attr('src', scope._texture)[0];
 	}
 
@@ -148,7 +151,7 @@ define(['jquery', 'joshua/util/Class', 'modernizr'], function($, Class){
 			$scope = $(scope);
 
 		if(scope._loaded){
-			$scope.trigger('loaded');
+			if(scope._onload) scope._onload();
 			return;
 		}
 
@@ -158,7 +161,7 @@ define(['jquery', 'joshua/util/Class', 'modernizr'], function($, Class){
 		});
 
 		scope._loaded = true;
-		$scope.trigger('loaded');
+		if(scope._onload) scope._onload();
 	}
 
 	// render frame animation, and check if reach end or should loop
@@ -185,7 +188,7 @@ define(['jquery', 'joshua/util/Class', 'modernizr'], function($, Class){
 					scope._paused = true;
 					clearTimeout(scope._st);
 
-					$scope.trigger('done');
+					if(scope._ondone) scope._ondone();
 				}
 			}else{
 				scope._renderFrames();
