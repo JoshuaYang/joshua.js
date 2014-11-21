@@ -1,3 +1,8 @@
+/**
+ * @author Joshua
+ * @date 2014/11/21
+ */
+
 define(function(){
     var ua = window.navigator.userAgent.toLowerCase();//alert(ua);
 
