@@ -18,7 +18,6 @@ define(function(){
         isAndroid43: ua.match(/android 4\.3/i) !== null,
         isIE: /(msie|trident)/i.test(navigator.userAgent), //window.navigator.appName.indexOf("Microsoft") !== -1,
         isIE8: ua.match(/msie 8/) !== null,
-        ltIE9 : $("html").hasClass("lt-ie9"),
         isChrome: ua.match(/Chrome/gi) !== null,
         isFirefox: ua.match(/firefox/gi) !== null,
         isWebkit: ua.match(/webkit/gi) !== null,
