@@ -26,5 +26,5 @@ Picture.preload({
 
 ## options:
 * `onError` - call when cause error during load
-* `onLoad` - call when image is loaded
+* `onLoad(loadCount, totalCount)` - call when image is loaded
 * `onComplete` - call when all images are loaded

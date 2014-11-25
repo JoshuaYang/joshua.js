@@ -17,7 +17,7 @@ define(['jquery', 'joshua/util/Class', 'joshua/util/Platform', 'modernizr'], fun
 
 	// start to load all pictures
 	Scheme.preload = function(options){
-		Scheme.options = options;
+		Scheme.options = options ? options : {};
 
 		Scheme.items = $('.' + Scheme.className);
 		Scheme.totalCount = Scheme.items.length;
@@ -79,7 +79,7 @@ define(['jquery', 'joshua/util/Class', 'joshua/util/Platform', 'modernizr'], fun
 		Scheme._doIfComplete();
 
 		if(Scheme.options.onLoad){
-			Scheme.options.onLoad();
+			Scheme.options.onLoad(Scheme.loadCount, Scheme.totalCount);
 		}
 	}
 
