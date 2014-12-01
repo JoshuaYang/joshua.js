@@ -10,8 +10,7 @@ require.config({
     paths: {
         "jquery": "vendors/jquery/dist/jquery.min",
         'domReady': 'vendors/requirejs-domready/domReady',
-        'modernizr': 'vendors/modernizr/modernizr',
-        'touchswipe': 'vendors/jquery-touchswipe/jquery.touchSwipe.min'
+        'modernizr': 'vendors/modernizr/modernizr'
     },
     shim: {
         'touchswipe': {
@@ -27,11 +26,10 @@ require(['jquery',
         'joshua/ui/Sprite', 
         'joshua/ui/Picture', 
         'joshua/interact/smooth_mousewheel', 
-        'joshua/ui/Teletext',
         'joshua/ui/Rain',
         'joshua/test', 
         'domReady!'], 
-    function($, Sprite, Picture, SmoothMouseWheel, Teletext, Rain){
+    function($, Sprite, Picture, SmoothMouseWheel, Rain){
 
     /* begin Picture */
     Picture.preload({
@@ -145,26 +143,6 @@ require(['jquery',
     });
 
     /* end SmoothMosueWheel */
-
-
-
-
-
-
-
-
-
-    var t1;
-    t1 = new Teletext('.js-teletext', {
-        callback: function(){
-        }
-    });
-    // t1.reset();
-    setTimeout(function(){
-        t1.startAnimation();
-    }, 0000);
-
-
 
 
 
