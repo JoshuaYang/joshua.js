@@ -2,7 +2,7 @@
   /* line 2, /Users/mac/GitHub/joshua.js/dev/style/rain.less */
   0% {
     opacity: 0.5;
-    -webkit-transform: translateY(0px);
+    -webkit-transform: translateY('-100%');
   }
   /* line 6, /Users/mac/GitHub/joshua.js/dev/style/rain.less */
   10% {
@@ -18,7 +18,7 @@
   /* line 15, /Users/mac/GitHub/joshua.js/dev/style/rain.less */
   0% {
     opacity: 0.5;
-    -moz-transform: translateY(0px);
+    -moz-transform: translateY('-100%');
   }
   /* line 19, /Users/mac/GitHub/joshua.js/dev/style/rain.less */
   10% {
@@ -34,7 +34,7 @@
   /* line 28, /Users/mac/GitHub/joshua.js/dev/style/rain.less */
   0% {
     opacity: 0.5;
-    -o-transform: translateY(0px);
+    -o-transform: translateY('-100%');
   }
   /* line 32, /Users/mac/GitHub/joshua.js/dev/style/rain.less */
   10% {
@@ -50,7 +50,7 @@
   /* line 41, /Users/mac/GitHub/joshua.js/dev/style/rain.less */
   0% {
     opacity: 0.5;
-    transform: translateY(0px);
+    transform: translateY('-100%');
   }
   /* line 45, /Users/mac/GitHub/joshua.js/dev/style/rain.less */
   10% {
@@ -83,63 +83,32 @@ body {
   margin-bottom: 5px;
 }
 /* line 22, index.less */
-#teletext {
-  overflow: hidden;
-}
-/* line 25, index.less */
-#teletext .js-teletext {
-  width: 80%;
-  height: 300px;
-  outline: 5px dashed gray;
-  margin: 20px auto;
-}
-/* line 32, index.less */
-#teletext .js-teletext .teletext-item:nth-child(1) {
-  background-color: red;
-}
-/* line 35, index.less */
-#teletext .js-teletext .teletext-item:nth-child(2) {
-  background-color: yellow;
-}
-/* line 38, index.less */
-#teletext .js-teletext .teletext-item:nth-child(3) {
-  background-color: blue;
-}
-/* line 41, index.less */
-#teletext .js-teletext .teletext-item:nth-child(4) {
-  background-color: green;
-}
-/* line 44, index.less */
-#teletext .js-teletext .teletext-item:nth-child(5) {
-  background-color: pink;
-}
-/* line 51, index.less */
 #sprite {
   background-color: black;
 }
-/* line 54, index.less */
+/* line 25, index.less */
 #sprite .js-sprite1 {
   width: 300px;
   height: 291px;
 }
-/* line 60, index.less */
+/* line 31, index.less */
 #picture {
   background-color: pink;
 }
-/* line 63, index.less */
+/* line 34, index.less */
 #picture .js-picture {
   display: inline-block;
 }
-/* line 67, index.less */
+/* line 38, index.less */
 #picture .bg {
   width: 100px;
   height: 100px;
 }
-/* line 73, index.less */
+/* line 44, index.less */
 #smooth_mousewheel {
   background-color: green;
 }
-/* line 77, index.less */
+/* line 48, index.less */
 #rain {
   position: fixed;
   top: 0;
@@ -147,5 +116,9 @@ body {
   width: 100%;
   height: 100%;
   z-index: 9999999;
+}
+/* line 57, index.less */
+#fireworks {
+  background-color: black;
 }
 /*# sourceMappingURL=index.css.map */

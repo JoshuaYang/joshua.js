@@ -27,9 +27,10 @@ require(['jquery',
         'joshua/ui/Picture', 
         'joshua/interact/smooth_mousewheel', 
         'joshua/ui/Rain',
+        'joshua/ui/Fireworks',
         'joshua/test', 
         'domReady!'], 
-    function($, Sprite, Picture, SmoothMouseWheel, Rain){
+    function($, Sprite, Picture, SmoothMouseWheel, Rain, Fireworks){
 
     /* begin Picture */
     Picture.preload({
@@ -43,7 +44,10 @@ require(['jquery',
     /* end Picture */
 
 
-
+    new Fireworks('.fireworks', {
+        width: 300,
+        height: 300
+    });
 
 
 
