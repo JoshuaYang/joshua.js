@@ -30,7 +30,7 @@ define(['jquery', 'joshua/util/Class'], function($, Class){
 			'user-select': 'none'
 		});
 
-		if(this.$element.css('position') != 'fixed' && this.$element.css('position') != 'relative'){
+		if(this.$element.css('position') != 'fixed' && this.$element.css('position') != 'absolute'){
 			this.$element.css('position', 'relative');
 		}
 	}
