@@ -3,7 +3,7 @@
  * @date 2014/12/18
  */
 
-define(['jquery', 'joshua/util/Class', 'modernizr'], function($, Class){
+define(['jquery', 'joshua/util/Class', 'joshua/util/Platform', 'modernizr'], function($, Class){
 	// constructor method
 	var Scheme = Class.extend({ 
 		init: function(element, options){
@@ -270,9 +270,14 @@ define(['jquery', 'joshua/util/Class', 'modernizr'], function($, Class){
 
 		// toggle mousedown state and prevent canvas from being selected
 		$(canvas).on('mousedown touchstart', function(e){
-			mx = e.pageX - canvas.offsetLeft;
-			my = e.pageY - canvas.offsetTop;
-
+			if(window.platform.hasTouch){
+				mx = e.originalEvent.targetTouches[0].pageX - canvas.offsetLeft;
+				my = e.originalEvent.targetTouches[0].pageY - canvas.offsetTop;
+			}else{
+				mx = e.pageX - canvas.offsetLeft;
+				my = e.pageY - canvas.offsetTop;
+			}
+			
 			e.preventDefault();
 			mousedown = true;
 		});
@@ -285,8 +290,6 @@ define(['jquery', 'joshua/util/Class', 'modernizr'], function($, Class){
 		// once the window loads, we are ready for some fireworks!
 		loop();
 	}
-
-
 
 	return Scheme;
 });

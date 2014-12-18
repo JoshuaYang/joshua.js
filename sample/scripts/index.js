@@ -44,15 +44,6 @@ require(['jquery',
     /* end Picture */
 
 
-    new Fireworks('.fireworks', {
-        width: 300,
-        height: 300
-    });
-
-
-
-
-
     /* begin Sprite */
 
     var s1;
@@ -162,5 +153,13 @@ require(['jquery',
         maxSpeed: 10,
         minDelay: 2,
         maxDelay: 6
+    });
+
+
+
+    //fireworks
+    new Fireworks('.fireworks', {
+        width: 300,
+        height: 300
     });
 });
