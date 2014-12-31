@@ -26,12 +26,15 @@ require(['jquery',
         'joshua/ui/Sprite', 
         'joshua/ui/Picture', 
         'joshua/interact/smooth_mousewheel', 
-        'joshua/ui/Rain',
+        'joshua/ui/Falldown',
         'joshua/ui/Fireworks',
-        'joshua/test', 
+        'joshua/util/Url',
+        'joshua/test',
         'domReady!'], 
-    function($, Sprite, Picture, SmoothMouseWheel, Rain, Fireworks){
+    function($, Sprite, Picture, SmoothMouseWheel, Falldown, Fireworks, Url){
 
+    console.log(Url.getParamValue('id'));
+    
     /* begin Picture */
     Picture.preload({
         prefix: './',
@@ -146,8 +149,8 @@ require(['jquery',
 
 
     // rain
-    new Rain($('#rain'), {
-        source: ['images/rain/yellow.png', 'images/rain/blue.png', 'images/rain/pink.png'],
+    new Falldown($('#falldown'), {
+        source: ['images/falldown/yellow.png', 'images/falldown/blue.png', 'images/falldown/pink.png'],
         count: 20,
         minSpeed: 6,
         maxSpeed: 10,

@@ -53,7 +53,7 @@ define(['jquery', 'joshua/util/Class'], function($, Class){
 							position: 'absolute',
 							left: posX,
 							top: -20,
-							animation: 'rain ' + duration + 's linear ' + delay + 's infinite'
+							animation: 'falldown ' + duration + 's linear ' + delay + 's infinite'
 						})
 						.appendTo(scope.$element);
 		}

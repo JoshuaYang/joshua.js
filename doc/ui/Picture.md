@@ -10,6 +10,7 @@ preload image. If browser support canvas, will use `<canvas>`, otherwise will us
 ## usage:
 ```javascript
 Picture.preload({
+	prefix: './',
     onError: function(){},
     onLoad: function(){},
     onComplete: function(){}
@@ -25,6 +26,7 @@ Picture.preload({
 * `preload()` - load all images
 
 ## options:
+* `prefix` - prefix string before every path
 * `onError` - call when cause error during load
 * `onLoad(loadCount, totalCount, source)` - call when image is loaded
 * `onComplete` - call when all images are loaded

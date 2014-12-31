@@ -1,9 +1,9 @@
 /**
  * @author Joshua
- * @date 2013/5/27
+ * @date 2014/5/27
  */
 
-define(function() {
+define(function(){
     var initializing = false, fnTest = /xyz/.test(function() { xyz;
     }) ? /\b_super\b/ : /.*/;
 

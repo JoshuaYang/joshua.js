@@ -6,7 +6,7 @@
 define(function(){
     var ua = window.navigator.userAgent.toLowerCase();//alert(ua);
 
-    window.platform = {
+    var Scheme = {
         isiPad: ua.match(/ipad/i) !== null,
         isiPhone: ua.match(/iphone/i) !== null,
         isAndroid: ua.match(/android/i) !== null,
@@ -28,14 +28,14 @@ define(function(){
         supportsSvg: !! document.createElementNS && !! document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect
     };
 
-    window.platform.isAndroidPad = platform.isAndroid && !platform.isMobile;
-    window.platform.isTablet = platform.isiPad || platform.isAndroidPad;
-    window.platform.isDesktop = !(platform.isMobile || platform.isTablet);
-    window.platform.isIOS = platform.isiPad || platform.isiPhone;
-    window.platform.isiPhone4 = platform.isiPhone && window.screen.height == 480;
-    window.platform.isiPhone5 = platform.isiPhone && window.screen.height == 568;
-    window.platform.isIOS5 = window.platform.isIOS && ua.match(/os 5/i) !== null;
-    window.platform.isIOS6 = window.platform.isIOS && ua.match(/os 6/i) !== null;
-    window.platform.isIOS7 = window.platform.isIOS && ua.match(/os 7/i) !== null;
+    Scheme.isAndroidPad = Scheme.isAndroid && !Scheme.isMobile;
+    Scheme.isTablet = Scheme.isiPad || Scheme.isAndroidPad;
+    Scheme.isDesktop = !(Scheme.isMobile || Scheme.isTablet);
+    Scheme.isIOS = Scheme.isiPad || Scheme.isiPhone;
+    Scheme.isIOS5 = Scheme.isIOS && ua.match(/os 5/i) !== null;
+    Scheme.isIOS6 = Scheme.isIOS && ua.match(/os 6/i) !== null;
+    Scheme.isIOS7 = Scheme.isIOS && ua.match(/os 7/i) !== null;
+
+    return Scheme;
 });
 

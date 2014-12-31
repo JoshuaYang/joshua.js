@@ -3,14 +3,14 @@ generate some elements to fall down like rain.
 
 ## html format：
 ```html
-<div id="rain"></div>
+<div id="falldown"></div>
 ```
 
 ## style:
 ```css
-@import "../../dev/style/rain.less";
+@import "../../dev/style/falldown.less";
 
-#rain{
+#falldown{
     position: fixed;
     top: 0;
     left: 0;
@@ -22,8 +22,8 @@ generate some elements to fall down like rain.
 
 ## usage:
 ```javascript
-new Rain($('#rain'), {
-    source: ['images/rain/yellow.png', 'images/rain/blue.png', 'images/rain/pink.png'],
+new Falldown($('#falldown'), {
+    source: ['images/falldown/yellow.png', 'images/falldown/blue.png', 'images/falldown/pink.png'],
     count: 20,
     minSpeed: 6,
     maxSpeed: 10,

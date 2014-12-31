@@ -1,4 +1,4 @@
-@-webkit-keyframes rain {
+@-webkit-keyframes falldown {
   /* line 2, /Users/mac/GitHub/joshua.js/dev/style/rain.less */
   0% {
     opacity: 0.5;
@@ -14,7 +14,7 @@
     -webkit-transform: translateY(900px);
   }
 }
-@-moz-keyframes rain {
+@-moz-keyframes falldown {
   /* line 15, /Users/mac/GitHub/joshua.js/dev/style/rain.less */
   0% {
     opacity: 0.5;
@@ -30,7 +30,7 @@
     -moz-transform: translateY(900px);
   }
 }
-@-o-keyframes rain {
+@-o-keyframes falldown {
   /* line 28, /Users/mac/GitHub/joshua.js/dev/style/rain.less */
   0% {
     opacity: 0.5;
@@ -46,7 +46,7 @@
     -o-transform: translateY(900px);
   }
 }
-@keyframes rain {
+@keyframes falldown {
   /* line 41, /Users/mac/GitHub/joshua.js/dev/style/rain.less */
   0% {
     opacity: 0.5;
@@ -109,7 +109,7 @@ body {
   background-color: green;
 }
 /* line 48, index.less */
-#rain {
+#falldown {
   position: fixed;
   top: 0;
   left: 0;

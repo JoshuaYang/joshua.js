@@ -1,6 +1,6 @@
 /**
  * @author Joshua
- * @date 2013/5/6
+ * @date 2014/5/6
  */
 
 define(['jquery', 'joshua/util/Class', 'modernizr'], function($, Class){

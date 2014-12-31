@@ -3,7 +3,7 @@
  * @date 2014/12/18
  */
 
-define(['jquery', 'joshua/util/Class', 'joshua/util/Platform', 'modernizr'], function($, Class){
+define(['jquery', 'joshua/util/Class', 'joshua/util/Platform'], function($, Class, Platform){
 	// constructor method
 	var Scheme = Class.extend({ 
 		init: function(element, options){
@@ -270,7 +270,7 @@ define(['jquery', 'joshua/util/Class', 'joshua/util/Platform', 'modernizr'], fun
 
 		// toggle mousedown state and prevent canvas from being selected
 		$(canvas).on('mousedown touchstart', function(e){
-			if(window.platform.hasTouch){
+			if(Platform.hasTouch){
 				mx = e.originalEvent.targetTouches[0].pageX - canvas.offsetLeft;
 				my = e.originalEvent.targetTouches[0].pageY - canvas.offsetTop;
 			}else{
