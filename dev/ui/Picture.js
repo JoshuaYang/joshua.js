@@ -46,7 +46,7 @@ define(['jquery', 'joshua/util/Class', 'joshua/util/Platform', 'modernizr'], fun
 	// load image source
 	Scheme.prototype._load = function(){
 		var scope = this;
-		scope._source = scope.$element.attr('js-source');
+		scope._source = scope.$element.attr('js-source') + '?t=' + (new Date()).getTime();
 		scope._imgtype = scope.$element.attr('js-imgtype');
 
 		if(Scheme.options.prefix){

@@ -60,7 +60,7 @@ define(['jquery', 'joshua/util/Class'], function($, Class){
 	}
 
 
-	 function random(start, end){
+	function random(start, end){
 		return parseInt(start + Math.random() * (end - start));
 	}
 
