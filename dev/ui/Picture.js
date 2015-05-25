@@ -83,7 +83,7 @@ define(['jquery', 'joshua/util/Class', 'joshua/util/Platform', 'modernizr'], fun
 		Scheme._doIfComplete();
 
 		if(Scheme.options.onLoad){
-			Scheme.options.onLoad(Scheme.loadCount, Scheme.totalCount, scope._source);
+			Scheme.options.onLoad(Scheme.loadCount, Scheme.totalCount, scope._source, scope._texture.width, scope._texture.height, scope.$element);
 		}
 	}
 

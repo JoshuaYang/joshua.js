@@ -39,7 +39,7 @@ require(['jquery',
     Picture.preload({
         prefix: './',
         onError: function(){},
-        onLoad: function(loadCount, totalCount){
+        onLoad: function(loadCount, totalCount, source, width, height, element){
             console.log(parseInt(loadCount / totalCount * 100) + '%');
         },
         onComplete: function(){}
